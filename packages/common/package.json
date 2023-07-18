@@ -1,6 +1,5 @@
 {
   "name": "@shadow/common",
-  "private": true,
   "version": "0.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -26,10 +25,6 @@
     "mitt": "^3.0.1",
     "react": "^18.2.0",
     "taro-hooks": "1.5.10"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
   },
   "gitHead": "e6d686325a542569f22ca29155b197f35847c606"
 }

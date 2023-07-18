@@ -1,6 +1,5 @@
 {
   "name": "@shadow/middleware",
-  "private": true,
   "version": "0.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -16,9 +15,5 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
   "gitHead": "e6d686325a542569f22ca29155b197f35847c606"
 }
