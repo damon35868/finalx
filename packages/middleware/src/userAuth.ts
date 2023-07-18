@@ -1,4 +1,4 @@
-import { getItem, setUserAuth, config } from "@shadow/common";
+import { getItem, setUserAuth, config } from "@finalx/common";
 import { LocalStorageKeys } from "./enums";
 
 interface UserAuthConfig {

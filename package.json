@@ -1,5 +1,5 @@
 {
-  "name": "shadow",
+  "name": "finalx",
   "private": true,
   "workspaces": [
     "packages/*"

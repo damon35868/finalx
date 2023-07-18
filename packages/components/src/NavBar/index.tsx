@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, memo, useState } from "react";
 import { usePageScroll } from "@tarojs/taro";
 import classNames from "classnames";
-import { routerBack, useSystemSize } from "@shadow/common";
+import { routerBack, useSystemSize } from "@finalx/common";
 import { Image, Text, View } from "@tarojs/components";
 import "./index.scss";
 
