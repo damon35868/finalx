@@ -153,7 +153,7 @@ export function toast(title: string, options?: any) {
  * @return {*}
  */
 
-let timer: string | number | NodeJS.Timeout | undefined;
+let timer: any;
 export function clearCountDown() {
   timer && clearInterval(timer);
 }
