@@ -13,6 +13,9 @@
     "build": "npm run clean && tsdx build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@babel/core": "^7.22.9",
     "@rollup/plugin-typescript": "^11.1.2",
