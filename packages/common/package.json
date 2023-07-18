@@ -1,6 +1,6 @@
 {
   "name": "@shadow/common",
-  "version": "0.0.3",
+  "version": "0.0.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,5 +29,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "95f73fb84d38df220412f8868a7995203cc974a7"
+  "gitHead": "41cb1643248b72d9f178ffbb15dd9cc29a768b30"
 }
