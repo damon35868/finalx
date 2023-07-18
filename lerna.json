@@ -6,8 +6,7 @@
         "*.md",
         "ignored-file",
         "*.tsconfg.json"
-      ],
-      "verifyAccess": false
+      ]
     }
   },
   "version": "0.0.1"
