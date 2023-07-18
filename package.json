@@ -1,10 +1,14 @@
 {
   "name": "shadow",
-  "private": true,
+  "private": false,
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
     "lerna": "^6.6.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

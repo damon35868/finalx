@@ -1,6 +1,6 @@
 {
   "name": "@shadow/components",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,5 +23,9 @@
     "rollup-plugin-postcss": "^4.0.2",
     "sass": "^1.63.6"
   },
-  "gitHead": "3decf26d410bba06d9c6238dc070531c296a1a2d"
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "gitHead": "e6d686325a542569f22ca29155b197f35847c606"
 }
