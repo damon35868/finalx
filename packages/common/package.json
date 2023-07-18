@@ -1,13 +1,13 @@
 {
   "name": "@shadow/common",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && tsdx build",
@@ -22,5 +22,6 @@
     "mitt": "^3.0.1",
     "react": "^18.2.0",
     "taro-hooks": "1.5.10"
-  }
+  },
+  "gitHead": "3decf26d410bba06d9c6238dc070531c296a1a2d"
 }

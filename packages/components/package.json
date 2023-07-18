@@ -1,6 +1,6 @@
 {
   "name": "@shadow/components",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@tarojs/components": "^3.6.8",
     "jotai": "^2.2.2",
@@ -19,5 +19,6 @@
     "react-dom": "^18.2.0",
     "rollup-plugin-postcss": "^4.0.2",
     "sass": "^1.63.6"
-  }
+  },
+  "gitHead": "3decf26d410bba06d9c6238dc070531c296a1a2d"
 }
