@@ -1,0 +1,60 @@
+.sd_modal {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 0 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 88888888;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  &.show {
+    visibility: visible;
+    .sd_modal-scale-in {
+      animation: scale-in 0.3s ease;
+    }
+  }
+
+  &-scale-out {
+    animation: scale-out 0.3s ease forwards;
+  }
+  &-close {
+    padding: 40rpx;
+    position: absolute;
+    left: 50%;
+    bottom: -64px;
+    transform: translateX(-50%);
+    &-icon {
+      font-size: 28rpx;
+      width: 28rpx;
+      height: 28rpx;
+      color: #333;
+    }
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}

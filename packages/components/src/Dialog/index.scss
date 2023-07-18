@@ -1,0 +1,30 @@
+.sd_dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50rpx 60rpx 54rpx;
+  width: 550rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 16px;
+
+  &-title {
+    font-size: 34rpx;
+  }
+  &-desc {
+    font-size: 28rpx;
+    padding-top: 32rpx;
+    padding-bottom: 58rpx;
+  }
+  &-btn {
+    height: 80rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50rpx;
+    width: 100%;
+    color: #fff;
+    background: linear-gradient(270deg, #fe3f38 0%, #fb7963 100%);
+  }
+}

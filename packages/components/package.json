@@ -1,0 +1,23 @@
+{
+  "name": "@shadow/components",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsdx build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tarojs/components": "^3.6.8",
+    "jotai": "^2.2.2",
+    "postcss": "^8.4.26",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "sass": "^1.63.6"
+  }
+}

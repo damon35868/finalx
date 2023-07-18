@@ -1,0 +1,35 @@
+.sd_nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in;
+
+  .sd_nav-bar-content {
+    font-size: 31rpx;
+    font-weight: 500;
+    position: relative;
+    display: flex;
+    align-items: center;
+    .sd_nav-bar-back-parent {
+      width: 120rpx;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      .sd_nav-bar-back-icon {
+        padding-left: 10rpx;
+        width: 40rpx;
+        height: 40rpx;
+        z-index: 999;
+      }
+    }
+
+    .sd_nav-bar-title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}

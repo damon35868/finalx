@@ -1,0 +1,26 @@
+{
+  "name": "@shadow/common",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsdx build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@babel/core": "^7.22.9",
+    "@rollup/plugin-typescript": "^11.1.2",
+    "@tarojs/taro": "^3.6.8",
+    "@types/react": "^18.2.15",
+    "jotai": "^2.2.2",
+    "mitt": "^3.0.1",
+    "react": "^18.2.0",
+    "taro-hooks": "1.5.10"
+  }
+}

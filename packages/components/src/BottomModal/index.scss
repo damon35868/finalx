@@ -1,0 +1,36 @@
+.sd_bottom-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1010;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: visibility 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+
+  &-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translate3d(0, calc(100% + 68px), 0);
+    transition: transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+
+    &.rounded {
+      border-top-left-radius: 44rpx;
+      border-top-right-radius: 44rpx;
+    }
+
+    &-main {
+      overflow: hidden;
+    }
+  }
+
+  &.show {
+    visibility: visible;
+    .active {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
