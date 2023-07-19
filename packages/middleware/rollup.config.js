@@ -9,19 +9,22 @@ import babel from "@rollup/plugin-babel";
 export default [
   {
     input: "src/index.ts",
-    output: [
-      {
-        file: "dist/index.esm.js",
-        format: "esm",
-        sourcemap: true,
-        name: "finalx-middleware-esm"
-      },
-      {
-        file: "dist/index.cjs.js",
-        format: "cjs",
-        sourcemap: true
-      }
-    ],
+    output: {
+      file: "dist/index.esm.js",
+      format: "esm",
+      sourcemap: true,
+      name: "finalx-middleware-esm"
+    },
+    plugins: [external(), commonjs(), typescript({ tsconfig: "./tsconfig.json" }), terser(), babel()],
+    external: ["react", "@tarojs/taro", "taro-hooks"]
+  },
+  {
+    input: "src/index.ts",
+    output: {
+      file: "dist/index.cjs.js",
+      format: "cjs",
+      sourcemap: true
+    },
     plugins: [external(), resolve(), commonjs(), typescript({ tsconfig: "./tsconfig.json" }), terser(), babel()],
     external: ["react", "@tarojs/taro", "taro-hooks"]
   },

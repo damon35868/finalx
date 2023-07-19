@@ -10,19 +10,37 @@ import dts from "rollup-plugin-dts";
 export default [
   {
     input: "src/index.ts",
-    output: [
-      {
-        file: "dist/index.esm.js",
-        format: "esm",
-        sourcemap: true,
-        name: "finalx-components"
-      },
-      {
-        file: "dist/index.cjs.js",
-        format: "cjs",
-        sourcemap: true
-      }
+    output: {
+      file: "dist/index.esm.js",
+      format: "esm",
+      sourcemap: true,
+      name: "finalx-components"
+    },
+    plugins: [
+      external(),
+      commonjs(),
+      typescript({ tsconfig: "./tsconfig.json" }),
+      postcss({
+        inject: true,
+        minimize: true,
+        extract: "style.css"
+      }),
+      terser(),
+      babel({
+        babelHelpers: "bundled",
+        exclude: "node_modules/**",
+        presets: ["@babel/preset-react"]
+      })
     ],
+    external: ["react", "@tarojs/taro", "@tarojs/components"]
+  },
+  {
+    input: "src/index.ts",
+    output: {
+      file: "dist/index.cjs.js",
+      format: "cjs",
+      sourcemap: true
+    },
     plugins: [
       external(),
       resolve(),
