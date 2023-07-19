@@ -1,6 +1,6 @@
 {
   "name": "@finalx/components",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "",
   "type": "module",
   "main": "dist/index.esm.js",
@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "@babel/preset-react": "^7.22.5",
-    "@finalx/common": "^0.0.9",
+    "@finalx/common": "^0.1.0",
     "@rollup/plugin-typescript": "^11.1.2",
     "@tarojs/components": "3.6.2",
     "@tarojs/taro": "3.6.2",
