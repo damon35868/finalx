@@ -39,8 +39,7 @@ export default [
         exclude: "node_modules/**",
         presets: ["@babel/preset-react"]
       })
-    ],
-    external: [/node_modules/]
+    ]
   },
   {
     input: "dist/index.d.ts",

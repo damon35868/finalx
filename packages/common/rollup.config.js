@@ -4,7 +4,7 @@ import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
 import external from "rollup-plugin-peer-deps-external";
 import dts from "rollup-plugin-dts";
-// import babel from "@rollup/plugin-babel";
+import babel from "@rollup/plugin-babel";
 
 export default [
   {
@@ -27,10 +27,13 @@ export default [
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
-      terser()
-      // babel()
-    ],
-    external: [/node_modules/]
+      terser(),
+      babel({
+        babelHelpers: "bundled",
+        exclude: "node_modules/**",
+        presets: ["@babel/preset-react"]
+      })
+    ]
   },
   {
     input: "dist/index.d.ts",
