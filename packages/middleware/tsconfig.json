@@ -1,21 +1,21 @@
 {
-  "include": [
-    "src" ],
   "compilerOptions": {
-    "module": "esnext",
-    "lib": [ "esnext"],
-    "target": "ESNext",
-    "importHelpers": true,
     "declaration": true,
-    "sourceMap": true,
-    "rootDir": "./src",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["ESNext"],
     "moduleResolution": "node",
-    "jsx": "react",
-    "esModuleInterop": true
+    "outDir": "./dist",
+    "removeComments": false,
+    "sourceMap": false,
+    "target": "es6",
+    "jsx": "react"
+  },
+  "exclude": ["node_modules"],
+  "include": [
+    "src/",
+  ],
+  "ts-node": {
+    "esm": true
   }
 }
