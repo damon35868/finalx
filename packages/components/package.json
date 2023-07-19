@@ -1,6 +1,6 @@
 {
   "name": "@finalx/components",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "",
   "type": "commonjs",
   "main": "dist/index.cjs.js",
@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "@babel/preset-react": "^7.22.5",
-    "@finalx/common": "^0.1.2",
+    "@finalx/common": "^0.1.3",
     "@rollup/plugin-typescript": "^11.1.2",
     "@tarojs/components": "3.6.8",
     "@tarojs/taro": "3.6.8",
