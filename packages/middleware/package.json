@@ -2,6 +2,7 @@
   "name": "@finalx/middleware",
   "version": "0.1.2",
   "description": "",
+  "type": "commonjs",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "scripts": {
@@ -26,6 +27,7 @@
     "@tarojs/taro": "3.6.8",
     "jotai": "^2.2.2",
     "postcss": "^8.4.26",
+    "react": "17.0.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^5.1.6"

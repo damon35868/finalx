@@ -22,7 +22,7 @@ export default [
         sourcemap: true
       }
     ],
-    plugins: [external(), resolve(), commonjs(), typescript(), terser(), babel()],
+    plugins: [external(), resolve(), commonjs(), typescript({ tsconfig: "./tsconfig.json" }), terser(), babel()],
     external: ["react", "@tarojs/taro", "taro-hooks"]
   },
   {
