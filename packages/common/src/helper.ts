@@ -42,7 +42,7 @@ class Helper {
 
       callback && callback(res);
       showToast && text && toast(`${text}成功`);
-    } catch (e) {
+    } catch (e: any) {
       onError && onError(e);
       showToast && toast(errorText || e.message);
     }

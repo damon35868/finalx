@@ -2,11 +2,12 @@
   "name": "@finalx/components",
   "version": "0.0.1",
   "description": "",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && tsdx build",
+    "build": "npm run clean && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,6 +16,8 @@
     "dist"
   ],
   "dependencies": {
+    "@finalx/common": "^0.0.2",
+    "@rollup/plugin-typescript": "^11.1.2",
     "@tarojs/components": "^3.6.8",
     "@types/node": "^20.4.2",
     "jotai": "^2.2.2",

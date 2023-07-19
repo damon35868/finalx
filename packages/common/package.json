@@ -4,13 +4,13 @@
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "type": "module",
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && tsdx build",
+    "build": "npm run clean && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
@@ -18,12 +18,16 @@
   ],
   "dependencies": {
     "@babel/core": "^7.22.9",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-typescript": "^11.1.2",
     "@tarojs/taro": "^3.6.8",
     "@types/react": "^18.2.15",
     "jotai": "^2.2.2",
     "mitt": "^3.0.1",
+    "postcss": "^8.4.26",
     "react": "^18.2.0",
+    "rollup-plugin-dts": "^5.3.0",
     "taro-hooks": "1.5.10"
   },
   "publishConfig": {

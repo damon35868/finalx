@@ -18,5 +18,11 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "94554b20156819df718462ed139bf87db847b474"
+  "gitHead": "94554b20156819df718462ed139bf87db847b474",
+  "dependencies": {
+    "@finalx/common": "^0.0.2",
+    "@rollup/plugin-typescript": "^11.1.2",
+    "jotai": "^2.2.2",
+    "postcss": "^8.4.26"
+  }
 }

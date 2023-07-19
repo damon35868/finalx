@@ -1,13 +1,13 @@
 {
   "include": ["src" ],
   "compilerOptions": {
+    "outDir": "./dist",
     "module": "esnext",
     "lib": [ "esnext"],
     "target": "ESNext",
     "importHelpers": true,
     "declaration": true,
     "sourceMap": true,
-    "rootDir": "./src",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
