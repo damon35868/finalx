@@ -2,12 +2,12 @@
   "name": "@finalx/middleware",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/index.js",
-  "module": "middleware.cjs.production.min.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && tsdx build",
+    "build": "npm run clean && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
@@ -24,8 +24,7 @@
     "@babel/preset-react": "^7.22.5",
     "@finalx/common": "^0.1.0",
     "@rollup/plugin-typescript": "^11.1.2",
-    "@tarojs/components": "3.6.2",
-    "@tarojs/taro": "3.6.2",
+    "@tarojs/taro": "3.6.8",
     "jotai": "^2.2.2",
     "postcss": "^8.4.26",
     "rollup-plugin-peer-deps-external": "^2.2.4",
