@@ -1,7 +1,10 @@
+import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
-import dts from "rollup-plugin-dts";
-import babel from "@rollup/plugin-babel";
+import { terser } from "rollup-plugin-terser";
+import external from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
+import babel from "@rollup/plugin-babel";
 
 export default {
   input: "src/index.ts",
@@ -15,17 +18,22 @@ export default {
       classnames: "classnames",
       "@tarojs/taro": "@tarojs/taro",
       "@finalx/common": "@finalx/common",
-      "@tarojs/components": "@tarojs/components"
+      "@tarojs/components": "@tarojs/components",
+      querystring: "querystring"
     }
   },
   external: ["react", "@tarojs/taro", "@tarojs/components"],
   plugins: [
+    external(),
+    resolve(),
+    commonjs(),
+    typescript({ tsconfig: "./tsconfig.json" }),
     postcss({
       inject: true,
       minimize: true, // 是否压缩CSS
       extract: "style.css"
     }),
-    typescript({ tsconfig: "./tsconfig.json" }),
+    terser(),
     babel({
       babelHelpers: "bundled",
       exclude: "node_modules/**",

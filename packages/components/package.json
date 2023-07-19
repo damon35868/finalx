@@ -16,7 +16,8 @@
     "dist"
   ],
   "dependencies": {
-    "@finalx/common": "^0.0.2",
+    "@babel/preset-react": "^7.22.5",
+    "@finalx/common": "^0.0.3",
     "@rollup/plugin-typescript": "^11.1.2",
     "@tarojs/components": "^3.6.8",
     "@types/node": "^20.4.2",
@@ -24,7 +25,9 @@
     "postcss": "^8.4.26",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.63.6"
   },
   "publishConfig": {
