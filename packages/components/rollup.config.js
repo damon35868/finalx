@@ -12,15 +12,7 @@ export default {
     file: "dist/index.js",
     format: "umd",
     sourcemap: true,
-    name: "common",
-    globals: {
-      react: "react",
-      classnames: "classnames",
-      "@tarojs/taro": "@tarojs/taro",
-      "@finalx/common": "@finalx/common",
-      "@tarojs/components": "@tarojs/components",
-      querystring: "querystring"
-    }
+    name: "finalx-components"
   },
   external: ["react", "@tarojs/taro", "@tarojs/components"],
   plugins: [

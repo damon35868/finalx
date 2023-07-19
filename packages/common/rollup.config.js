@@ -11,18 +11,9 @@ export default {
     file: "dist/index.js",
     format: "umd",
     sourcemap: true,
-    name: "common",
-    globals: {
-      react: "react",
-      mitt: "mitt",
-      jotai: "jotai",
-      "taro-hooks": "taro-hooks",
-      "@tarojs/taro": "@tarojs/taro",
-      "@finalx/common": "@finalx/common",
-      "@tarojs/components": "@tarojs/components"
-    }
+    name: "finalx-common"
   },
-  external: ["react", "@tarojs/taro", "@tarojs/components", "taro-hooks", "jotai", "mitt"],
+  external: ["react", "@tarojs/taro", "@tarojs/components", "taro-hooks"],
   plugins: [
     external(),
     resolve(),
