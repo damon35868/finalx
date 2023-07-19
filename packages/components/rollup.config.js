@@ -2,7 +2,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
-import external from "rollup-plugin-peer-deps-external";
+// import external from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
 import babel from "@rollup/plugin-babel";
 import dts from "rollup-plugin-dts";
@@ -24,22 +24,23 @@ export default [
       }
     ],
     plugins: [
-      external(),
+      // external(),
       resolve(),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
+      typescript(),
       postcss({
         inject: true,
         minimize: true,
         extract: "style.css"
       }),
-      terser(),
+      // terser(),
       babel({
         babelHelpers: "bundled",
         exclude: "node_modules/**",
         presets: ["@babel/preset-react"]
       })
-    ]
+    ],
+    external: ["react", "@taro/taro", "@taro/components", "**/node_modules/**"]
   },
   {
     input: "dist/index.d.ts",
