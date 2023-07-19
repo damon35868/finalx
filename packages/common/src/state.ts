@@ -20,7 +20,7 @@ export function setUserAuth(auth: boolean | undefined) {
 }
 
 export function useInitToken() {
-  const [, setTokenFn]: [string, any] = useAtom<null | string>(tokenAtom);
+  const [, setTokenFn]: [string | null, any] = useAtom<null | string>(tokenAtom);
 
   const setToken = (token: string) => {
     if (!token) {

@@ -40,7 +40,7 @@ export default [
         presets: ["@babel/preset-react"]
       })
     ],
-    external: ["react", "@tarojs/taro", "@tarojs/components", "taro-hooks"]
+    external: [/node_modules/]
   },
   {
     input: "dist/index.d.ts",

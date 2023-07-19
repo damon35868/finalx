@@ -1,5 +1,4 @@
-import React from "react";
-import { FC, ReactElement } from "react";
+import React, { ReactNode, FC } from "react";
 import classNames from "classnames";
 import { View } from "@tarojs/components";
 import "./index.scss";
@@ -9,7 +8,7 @@ interface BottomModalProps {
   setStatus?: (state: boolean) => any;
   onClose?: () => any;
   closeOnClickModal?: boolean;
-  children: ReactElement;
+  children: ReactNode;
   rounded?: boolean; //是否开启圆角
 }
 
