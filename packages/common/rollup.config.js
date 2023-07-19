@@ -1,8 +1,8 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
-// import { terser } from "rollup-plugin-terser";
-// import external from "rollup-plugin-peer-deps-external";
+import { terser } from "rollup-plugin-terser";
+import external from "rollup-plugin-peer-deps-external";
 import dts from "rollup-plugin-dts";
 import babel from "@rollup/plugin-babel";
 
@@ -22,15 +22,8 @@ export default [
         sourcemap: true
       }
     ],
-    plugins: [
-      // external(),
-      resolve(),
-      commonjs(),
-      typescript(),
-      // terser(),
-      babel()
-    ],
-    external: ["react", "@taro/taro", "@taro/components", "taro-hooks", "**/node_modules/**"]
+    plugins: [external(), resolve(), commonjs(), typescript(), terser(), babel()],
+    external: ["react", "@tarojs/taro", "@tarojs/components", "taro-hooks"]
   },
   {
     input: "dist/index.d.ts",

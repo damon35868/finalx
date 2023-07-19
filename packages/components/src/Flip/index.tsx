@@ -7,11 +7,11 @@ import { View } from "@tarojs/components";
 interface FlipProps {
   front: ReactNode;
   back: ReactNode;
-  model: any[];
+  model: [boolean, Function];
   props?: any;
 }
 export const Flip: FC<FlipProps> = ({ front, back, model, ...props }) => {
-  const [reverse, setReverse] = model || {};
+  const [reverse, setReverse]: [boolean, Function] = model;
 
   return (
     <View {...props} className={classNames("card-filp", { reverse })} onClick={() => back && setReverse(!reverse)}>
