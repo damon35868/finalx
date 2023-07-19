@@ -9,18 +9,18 @@ const tokenAtom = atom<null | string>(null);
 const userAuthAtom = atom<boolean | undefined>(undefined);
 
 export function useToken() {
-  const [token] = useAtom(tokenAtom);
+  const [token] = useAtom<null | string>(tokenAtom);
   return { token };
 }
 
 export function setUserAuth(auth: boolean | undefined) {
   const store = createStore();
   setItem("userAuth", auth);
-  store.set(userAuthAtom, auth);
+  // store.set(userAuthAtom, auth);
 }
 
 export function useInitToken() {
-  const [, setTokenFn] = useAtom(tokenAtom);
+  const [, setTokenFn]: [string, any] = useAtom<null | string>(tokenAtom);
 
   const setToken = (token: string) => {
     if (!token) {

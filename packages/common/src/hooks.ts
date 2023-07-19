@@ -76,7 +76,7 @@ export function useSystemSize() {
   return { ...size, customNavHeight: screenHeight - windowHeight, setSystemSize };
 }
 
-const systemAtom = atom(null);
+const systemAtom = atom<string | null>(null);
 export function useSystem() {
   const [system, setSystem]: [string | null, any] = useAtom<string | null>(systemAtom);
   return { system, setSystem };

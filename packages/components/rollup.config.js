@@ -5,31 +5,46 @@ import { terser } from "rollup-plugin-terser";
 import external from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
 import babel from "@rollup/plugin-babel";
+import dts from "rollup-plugin-dts";
 
-export default {
-  input: "src/index.ts",
-  output: {
-    file: "dist/index.js",
-    format: "umd",
-    sourcemap: true,
-    name: "finalx-components"
+export default [
+  {
+    input: "src/index.ts",
+    output: [
+      {
+        file: "dist/index.esm.js",
+        format: "esm",
+        sourcemap: true,
+        name: "finalx-components"
+      },
+      {
+        file: "dist/index.cjs.js",
+        format: "cjs",
+        sourcemap: true
+      }
+    ],
+    plugins: [
+      external(),
+      resolve(),
+      commonjs(),
+      typescript({ tsconfig: "./tsconfig.json" }),
+      postcss({
+        inject: true,
+        minimize: true,
+        extract: "style.css"
+      }),
+      terser(),
+      babel({
+        babelHelpers: "bundled",
+        exclude: "node_modules/**",
+        presets: ["@babel/preset-react"]
+      })
+    ]
   },
-  external: ["react", "@tarojs/taro", "@tarojs/components"],
-  plugins: [
-    external(),
-    resolve(),
-    commonjs(),
-    typescript({ tsconfig: "./tsconfig.json" }),
-    postcss({
-      inject: true,
-      minimize: true, // 是否压缩CSS
-      extract: "style.css"
-    }),
-    terser(),
-    babel({
-      babelHelpers: "bundled",
-      exclude: "node_modules/**",
-      presets: ["@babel/preset-react"]
-    })
-  ]
-};
+  {
+    input: "dist/index.d.ts",
+    output: [{ file: "dist/index.d.ts", format: "esm" }],
+    external: [/\.scss$/],
+    plugins: [dts()]
+  }
+];
