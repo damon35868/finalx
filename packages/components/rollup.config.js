@@ -39,7 +39,8 @@ export default [
         exclude: "node_modules/**",
         presets: ["@babel/preset-react"]
       })
-    ]
+    ],
+    external: ["react", "@tarojs/taro", "@tarojs/components", "taro-hooks"]
   },
   {
     input: "dist/index.d.ts",

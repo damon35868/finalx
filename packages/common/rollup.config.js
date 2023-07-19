@@ -29,7 +29,8 @@ export default [
       typescript({ tsconfig: "./tsconfig.json" }),
       terser()
       // babel()
-    ]
+    ],
+    external: ["react", "@tarojs/taro", "@tarojs/components", "taro-hooks"]
   },
   {
     input: "dist/index.d.ts",
