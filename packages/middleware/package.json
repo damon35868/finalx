@@ -1,6 +1,6 @@
 {
   "name": "@finalx/middleware",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,7 +21,7 @@
   "gitHead": "94554b20156819df718462ed139bf87db847b474",
   "dependencies": {
     "@babel/preset-react": "^7.22.5",
-    "@finalx/common": "^0.0.5",
+    "@finalx/common": "^0.0.6",
     "@rollup/plugin-typescript": "^11.1.2",
     "jotai": "^2.2.2",
     "postcss": "^8.4.26",
