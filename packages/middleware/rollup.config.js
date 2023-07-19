@@ -16,7 +16,7 @@ export default [
       name: "finalx-middleware-esm"
     },
     plugins: [external(), commonjs(), typescript({ tsconfig: "./tsconfig.json" }), terser(), babel()],
-    external: ["react", "@tarojs/taro", "taro-hooks"]
+    external: ["react", "@tarojs/taro"]
   },
   {
     input: "src/index.ts",
@@ -26,7 +26,7 @@ export default [
       sourcemap: true
     },
     plugins: [external(), resolve(), commonjs(), typescript({ tsconfig: "./tsconfig.json" }), terser(), babel()],
-    external: ["react", "@tarojs/taro", "taro-hooks"]
+    external: ["react", "@tarojs/taro"]
   },
   {
     input: "dist/index.d.ts",
