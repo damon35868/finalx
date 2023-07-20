@@ -19,8 +19,11 @@ export function setUserAuth(auth: boolean | undefined) {
   store.set(userAuthAtom, auth);
 }
 
-export function getUserAuth(): boolean {
-  return store.get(userAuthAtom);
+export function useUserAuthModal() {
+  return {
+    userAuthModalStatus: store.get(userAuthAtom),
+    setUserAuthModalStatus: setUserAuth
+  };
 }
 
 export function useInitToken() {
