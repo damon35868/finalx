@@ -8,13 +8,14 @@ import { LocalStorageKeys } from "./enums";
 //   };
 // }
 
-enum permissionsType {
+export enum permissionsType {
+  ALL = 0,
   USER = 1,
   PHONE = 2
 }
 
 class UserAuth {
-  private level = permissionsType.PHONE;
+  private level = permissionsType.ALL;
   private lastCb: Function | undefined;
   private userInfo = getItem(LocalStorageKeys.userInfo);
 
@@ -64,6 +65,9 @@ class UserAuth {
     const level = lv || this.level;
 
     switch (level) {
+      case permissionsType.ALL: {
+        return this.getUserPermission() && this.getPhonePermission();
+      }
       case permissionsType.USER: {
         return this.getUserPermission();
       }
@@ -76,7 +80,6 @@ class UserAuth {
     }
   }
 
-  // 暂时不需要校验用户信息权限
   getUserPermission() {
     const userInfo = this.userInfo || getItem(LocalStorageKeys.userInfo);
     const info = userInfo[this.filterKey.info];
