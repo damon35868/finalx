@@ -1,7 +1,7 @@
 {
   "name": "@finalx/cli",
   "version": "0.2.2",
-  "description": "",
+  "description": "cli",
   "author": "D.M <578328962@qq.com>",
   "homepage": "https://github.com/damon35868/shadow#readme",
   "license": "MIT",
@@ -34,5 +34,5 @@
     "path": "^0.12.7",
     "util": "^0.12.5"
   },
-  "gitHead": "687dbe022ef7ba383cd652ba64203073a56afaa0"
+  "gitHead": "7a8421786a79e093aebae1356e4a624e755b5004"
 }
