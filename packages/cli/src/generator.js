@@ -52,7 +52,8 @@ class Generator {
 
     console.log(`\r\n  cd ${chalk.cyan(this.targetDir)}`);
 
-    console.log("  npm run dev\r\n");
+    console.log("  yarn\r\n");
+    console.log("  yarn dev\r\n");
   }
 }
 
