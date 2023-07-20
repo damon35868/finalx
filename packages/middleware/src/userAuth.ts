@@ -14,15 +14,18 @@ enum permissionsType {
 }
 
 class UserAuth {
-  private filterKey = !isEmpty(config.middleware?.userAuth.filterKey)
-    ? config.middleware?.userAuth.filterKey
-    : {
-        phone: "mobilePhone",
-        info: "name"
-      };
   private level = permissionsType.PHONE;
   private lastCb: Function | undefined;
   private userInfo = getItem(LocalStorageKeys.userInfo);
+
+  get filterKey() {
+    return !isEmpty(config.middleware?.userAuth.filterKey)
+      ? config.middleware?.userAuth.filterKey
+      : {
+          phone: "mobilePhone",
+          info: "name"
+        };
+  }
 
   /**
    * @description: 查看授权
@@ -84,10 +87,6 @@ class UserAuth {
     const userInfo = this.userInfo || getItem(LocalStorageKeys.userInfo);
     const mobilePhone = userInfo[this.filterKey.phone];
     return !!mobilePhone;
-  }
-
-  get key() {
-    return this.filterKey;
   }
 }
 
