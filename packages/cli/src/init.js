@@ -1,11 +1,12 @@
 #! /usr/bin/env node
 
+const Generator = require("./generator");
 const fs = require("fs-extra");
 const path = require("path");
 const inquirer = require("inquirer");
 
-async function removeFile() {
-  console.log(`\r\n移除中...`);
+async function removeFile(rootDir) {
+  console.log(`\r\n覆盖中...`);
   await fs.remove(rootDir);
 }
 
@@ -15,7 +16,7 @@ module.exports = async function (name, options) {
 
   if (fs.existsSync(rootDir)) {
     if (options.force) {
-      await removeFile();
+      await removeFile(rootDir);
     } else {
       let { action } = await inquirer.prompt([
         {
@@ -38,13 +39,13 @@ module.exports = async function (name, options) {
       if (!action) return;
 
       if (action === "overwrite") {
-        await removeFile();
+        await removeFile(rootDir);
       }
     }
   }
 
   // 创建项目
-  const generator = new Generator(name, targetAir);
+  const generator = new Generator(name, rootDir);
 
   // 开始创建项目
   generator.create();
