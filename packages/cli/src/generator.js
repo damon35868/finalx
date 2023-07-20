@@ -48,12 +48,13 @@ class Generator {
   async create() {
     await this.download();
 
-    console.log(chalk.green("项目初始化完成!"));
+    console.log(chalk.green("项目初始化完成!\r\n"));
 
-    console.log(`\r\n  cd ${chalk.cyan(this.targetDir)}`);
+    console.log(`\r\n  cd ${chalk.cyan(this.targetDir)}\r\n`);
 
-    console.log("  yarn\r\n");
-    console.log("  yarn dev\r\n");
+    console.log(`  ${chalk.green("yarn")}\r\n`);
+
+    console.log(`  ${chalk.green("yarn dev")}\r\n`);
   }
 }
 
