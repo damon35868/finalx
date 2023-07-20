@@ -15,7 +15,7 @@ export default [
       sourcemap: true,
       name: "finalx-common-esm"
     },
-    plugins: [external(), commonjs(), typescript({ tsconfig: "./tsconfig.json" })],
+    plugins: [external(), commonjs(), typescript({ tsconfig: "./tsconfig.json" }), terser()],
     external: ["react", "@tarojs/taro", "@tarojs/components", "taro-hooks"]
   },
   {

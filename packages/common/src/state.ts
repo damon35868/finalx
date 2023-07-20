@@ -6,7 +6,8 @@ import { config } from "./config";
 
 const tokenAtom = atom<null | string>(null);
 
-const userAuthAtom = atom<boolean | undefined>(undefined);
+const userAuthAtom = atom<boolean>(false);
+const store = createStore();
 
 export function useToken() {
   const [token] = useAtom<null | string>(tokenAtom);
@@ -14,9 +15,12 @@ export function useToken() {
 }
 
 export function setUserAuth(auth: boolean | undefined) {
-  const store = createStore();
   setItem("userAuth", auth);
-  // store.set(userAuthAtom, auth);
+  store.set(userAuthAtom, auth);
+}
+
+export function getUserAuth(): boolean {
+  return store.get(userAuthAtom);
 }
 
 export function useInitToken() {

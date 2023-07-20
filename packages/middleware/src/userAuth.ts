@@ -1,12 +1,12 @@
-import { getItem, setUserAuth, config } from "@finalx/common";
+import { getItem, setUserAuth, config, isEmpty } from "@finalx/common";
 import { LocalStorageKeys } from "./enums";
 
-interface UserAuthConfig {
-  filterKey?: {
-    phone: string;
-    info: string;
-  };
-}
+// interface UserAuthConfig {
+//   filterKey?: {
+//     phone: string;
+//     info: string;
+//   };
+// }
 
 enum permissionsType {
   USER = 1,
@@ -14,18 +14,15 @@ enum permissionsType {
 }
 
 class UserAuth {
-  private filterKey = {
-    phone: "mobilePhone",
-    info: "name"
-  };
+  private filterKey = !isEmpty(config.middleware?.userAuth.filterKey)
+    ? config.middleware?.userAuth.filterKey
+    : {
+        phone: "mobilePhone",
+        info: "name"
+      };
   private level = permissionsType.PHONE;
   private lastCb: Function | undefined;
   private userInfo = getItem(LocalStorageKeys.userInfo);
-
-  constructor(config: UserAuthConfig | undefined) {
-    const { filterKey } = config || {};
-    filterKey && (this.filterKey = filterKey);
-  }
 
   /**
    * @description: 查看授权
@@ -88,6 +85,10 @@ class UserAuth {
     const mobilePhone = userInfo[this.filterKey.phone];
     return !!mobilePhone;
   }
+
+  get key() {
+    return this.filterKey;
+  }
 }
 
-export const userAuth = new UserAuth(config.middleware?.userAuth);
+export const userAuth = new UserAuth();
