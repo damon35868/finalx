@@ -19,9 +19,13 @@ export function setUserAuth(auth: boolean | undefined) {
   store.set(userAuthAtom, auth);
 }
 
+function getUserAuth(): boolean {
+  return store.get(userAuthAtom);
+}
+
 export function useUserAuthModal() {
   return {
-    userAuthModalStatus: store.get(userAuthAtom),
+    userAuthModalStatus: getUserAuth(),
     setUserAuthModalStatus: setUserAuth
   };
 }
