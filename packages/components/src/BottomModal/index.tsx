@@ -1,4 +1,4 @@
-import React, { ReactNode, FC } from "react";
+import React, { ReactNode, FC, CSSProperties } from "react";
 import classNames from "classnames";
 import { View } from "@tarojs/components";
 import "./index.scss";
@@ -10,16 +10,17 @@ interface BottomModalProps {
   closeOnClickModal?: boolean;
   children: ReactNode;
   rounded?: boolean; //是否开启圆角
+  style?: CSSProperties;
 }
 
-export const BottomModal: FC<BottomModalProps> = ({ status, setStatus, closeOnClickModal = true, onClose, children, rounded }) => {
+export const BottomModal: FC<BottomModalProps> = ({ status, setStatus, closeOnClickModal = true, onClose, style = {}, children, rounded }) => {
   const close = () => {
     onClose && onClose();
     setStatus && setStatus(false);
   };
 
   return (
-    <View className={classNames("sd_bottom-modal", { show: status })} onClick={() => closeOnClickModal && close()}>
+    <View style={style} className={classNames("sd_bottom-modal", { show: status })} onClick={() => closeOnClickModal && close()}>
       <View className={classNames("bg sd_bottom-modal-content", { active: status, rounded })} onClick={e => e.stopPropagation()}>
         <View className='sd_bottom-modal-content-main'>{children}</View>
       </View>

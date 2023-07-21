@@ -14,9 +14,7 @@
     "build": "npm run clean && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "files": [
-    "src/"
-  ],
+  "files": ["src"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/damon35868/shadow.git"

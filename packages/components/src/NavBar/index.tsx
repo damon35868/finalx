@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, memo, useState } from "react";
+import React, { CSSProperties, FC, ReactNode, memo, useState } from "react";
 import { usePageScroll } from "@tarojs/taro";
 import classNames from "classnames";
 import { routerBack, useSystemSize } from "@finalx/common";
@@ -7,7 +7,7 @@ import "./index.scss";
 
 interface NavBarProps {
   title?: string | null;
-  style?: any;
+  style?: CSSProperties;
   icon?: ReactNode;
   scrollShow?: boolean;
   onBack?: () => any;

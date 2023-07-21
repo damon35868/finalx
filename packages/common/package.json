@@ -13,9 +13,7 @@
     "build": "npm run clean && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@babel/core": "^7.22.9",
     "@babel/preset-react": "^7.22.5",

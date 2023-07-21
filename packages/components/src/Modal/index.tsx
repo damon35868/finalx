@@ -29,7 +29,10 @@ export const Modal: FC<ModalProps> = ({ status, setStatus, closeOnClickModal = t
   return (
     <View
       catchMove
-      className={classNames("sd_modal", { show: status })}
+      className={classNames("sd_modal", {
+        show: status,
+        bg: !hideBG
+      })}
       onClick={() => {
         if (!closeOnClickModal) return;
         close();
@@ -37,12 +40,7 @@ export const Modal: FC<ModalProps> = ({ status, setStatus, closeOnClickModal = t
         onCancel && onCancel();
       }}
     >
-      <View
-        onClick={e => e.stopPropagation()}
-        className={classNames(`sd_modal-scale-${contentStatus ? "in" : "out"}`, {
-          bg: !hideBG
-        })}
-      >
+      <View onClick={e => e.stopPropagation()} className={classNames(`sd_modal-scale-${contentStatus ? "in" : "out"}`)}>
         {children}
       </View>
     </View>
