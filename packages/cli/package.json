@@ -2,7 +2,7 @@
   "name": "@finalx/cli",
   "version": "0.2.6",
   "description": "",
-  "author": "D.M <578328962@qq.com>",
+  "author": "D.M",
   "homepage": "https://github.com/damon35868/shadow#readme",
   "license": "MIT",
   "main": "src/index.js",
