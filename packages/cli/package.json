@@ -1,6 +1,6 @@
 {
   "name": "@finalx/cli",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "",
   "author": "D.M <578328962@qq.com>",
   "homepage": "https://github.com/damon35868/shadow#readme",
@@ -14,7 +14,9 @@
     "build": "npm run clean && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/damon35868/shadow.git"
