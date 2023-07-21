@@ -1,0 +1,12 @@
+.bottom-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999999;
+  &-content {
+    display: flex;
+  }
+}

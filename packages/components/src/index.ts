@@ -5,3 +5,5 @@ export * from "./Loading";
 export * from "./Flip";
 export * from "./CountTimeDown";
 export * from "./NavBar";
+export * from "./NoContent";
+export * from "./Wrapper";

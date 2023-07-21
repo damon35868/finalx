@@ -1,0 +1,42 @@
+.no-content {
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-left: 16rpx;
+  padding-right: 16rpx;
+  font-size: 22rpx;
+
+  &-line {
+    height: 1rpx;
+    flex: 1;
+    background-color: #eee;
+  }
+  &-text {
+    padding-left: 22rpx;
+    padding-right: 22rpx;
+  }
+}
+
+.no-content-rect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 22rpx;
+
+  &-img {
+    width: 448rpx;
+    height: 448rpx;
+  }
+  &-text {
+    padding-top: 14rpx;
+    padding-left: 20rpx;
+    padding-right: 22rpx;
+  }
+}
