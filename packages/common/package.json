@@ -1,11 +1,13 @@
 {
   "name": "@finalx/common",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "",
   "main": "dist/index.esm.js",
   "module": "dist/index.cjs.js",
   "types": "dist/index.d.ts",
-  "keywords": ["finalx"],
+  "keywords": [
+    "finalx"
+  ],
   "author": "",
   "license": "MIT",
   "scripts": {

@@ -1,9 +1,11 @@
 {
   "name": "@finalx/cli",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "",
   "author": "D.M",
-  "keywords": ["finalx"],
+  "keywords": [
+    "finalx"
+  ],
   "homepage": "https://github.com/damon35868/shadow#readme",
   "license": "MIT",
   "main": "src/index.js",
