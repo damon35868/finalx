@@ -6,6 +6,10 @@
   z-index: 999;
   box-sizing: border-box;
   transition: all 0.3s ease-in;
+  &.bg {
+    color: #333;
+    background-color: #fff;
+  }
 
   .sd_nav-bar-content {
     font-size: 31rpx;

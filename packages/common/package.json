@@ -6,7 +6,8 @@
   "module": "dist/index.cjs.js",
   "types": "dist/index.d.ts",
   "keywords": [
-    "finalx"
+    "finalx",
+    "common"
   ],
   "author": "",
   "license": "MIT",
