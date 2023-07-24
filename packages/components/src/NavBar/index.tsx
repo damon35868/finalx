@@ -12,9 +12,13 @@ interface NavBarProps {
   scrollShow?: boolean;
   onBack?: () => any;
   showBack?: boolean;
+  theme?: "dark" | "light";
 }
 
-export const NavBar: FC<NavBarProps> = memo(({ title = "", scrollShow, onBack, showBack = true, icon, style = {} }) => {
+const lightIcon = "https://cdn.wujuxian.net/static/89ebcf6370cb240d34faeb522e6a11d61690179439886.png";
+const darkIcon = "https://cdn.wujuxian.net/static/7e44ce3ab64d4b95911ab66ef529f30b1689579223343.png";
+
+export const NavBar: FC<NavBarProps> = memo(({ title = "", scrollShow, onBack, showBack = true, icon, theme = "dark", style = {} }) => {
   const [top, setTop] = useState(0);
   const isScroll = top >= 110;
   const { customNavHeight, statusBarHeight } = useSystemSize();
@@ -29,6 +33,7 @@ export const NavBar: FC<NavBarProps> = memo(({ title = "", scrollShow, onBack, s
       style={{
         height: customNavHeight + "PX",
         paddingTop: statusBarHeight + "PX",
+        color: theme === "dark" ? "#333" : "#fff",
         ...style
       }}
     >
@@ -41,11 +46,7 @@ export const NavBar: FC<NavBarProps> = memo(({ title = "", scrollShow, onBack, s
               routerBack();
             }}
           >
-            {!icon ? (
-              <Image className='sd_nav-bar-back-icon' src='https://cdn.wujuxian.net/static/7e44ce3ab64d4b95911ab66ef529f30b1689579223343.png' />
-            ) : (
-              icon
-            )}
+            {!icon ? <Image className='sd_nav-bar-back-icon' src={theme === "dark" ? darkIcon : lightIcon} /> : icon}
           </View>
         )}
 
