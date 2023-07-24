@@ -3,6 +3,7 @@
   "version": "0.2.7",
   "description": "",
   "author": "D.M",
+  "keywords": ["finalx"],
   "homepage": "https://github.com/damon35868/shadow#readme",
   "license": "MIT",
   "main": "src/index.js",
