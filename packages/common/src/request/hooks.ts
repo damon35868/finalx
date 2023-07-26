@@ -3,8 +3,8 @@ import { useRequest as useQuery } from "taro-hooks";
 import { BaseOptions, BaseResult, LoadMoreOptions, PaginatedOptionsWithFormat } from "taro-hooks/dist/useRequest/types";
 import { getItem } from "../utils";
 import { LocalStorageKeys } from "../enums";
-import { useToken } from "../state";
 import { config } from "../config";
+import { useToken } from "../hooks";
 
 export interface requestOptions {
   url?: string;

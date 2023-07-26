@@ -1,8 +1,8 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useDidShow, getSystemInfo, useReachBottom as useOriginReachBottom, getMenuButtonBoundingClientRect } from "@tarojs/taro";
-import { atom, useAtom } from "jotai";
 import { WsEventFunc, wsClient } from "./ws";
 import { pageSizeStore } from "./pageStore";
+import { authStore, platformStore, systemInfoStore, tokenStore } from "./state";
 
 /**
  * 页面触底无限滚动
@@ -53,39 +53,23 @@ export function useShowFetch(model: any, opt = {}, cb?: () => any) {
   });
 }
 
-// 系统高度
-const systemInfoAtom = atom({
-  windowHeight: 670,
-  statusBarHeight: 20,
-  screenHeight: 736,
-  inputHeight: 0,
-  windowWidth: 414,
-  screenWidth: 414
-});
-interface systemInfoType {
-  windowHeight: number;
-  statusBarHeight: number;
-  screenHeight: number;
-  inputHeight: number;
-  windowWidth: number;
-  screenWidth: number;
-}
-
 export function useSystemSize() {
-  const [size, setSystemSize]: [systemInfoType, any] = useAtom<systemInfoType>(systemInfoAtom);
+  const size = systemInfoStore(store => store.state);
+  const setSystemSize = systemInfoStore(store => store.setter);
 
   let { windowHeight, screenHeight } = size;
   return { ...size, customNavHeight: screenHeight - windowHeight, setSystemSize };
 }
 
-const systemAtom = atom<string | null>(null);
 export function useSystem() {
-  const [system, setSystem]: [string | null, any] = useAtom<string | null>(systemAtom);
+  const system = platformStore(store => store.state);
+  const setSystem = platformStore(store => store.setter);
   return { system, setSystem };
 }
 
 /**
- * 系统尺寸
+ * @description: 系统尺寸
+ * @return {*}
  */
 let tryGetDeviceInfoCount = 3;
 export function useSystemInfo() {
@@ -124,6 +108,12 @@ export function useSystemInfo() {
   }, []);
 }
 
+/**
+ * @description: 全局事件注册钩子
+ * @param {string} evenName
+ * @param {WsEventFunc} eventAction
+ * @return {*}
+ */
 export function useEventListener(evenName: string, eventAction: WsEventFunc) {
   const timer = useRef<any>();
   const fnRef = useRef<WsEventFunc>(eventAction);
@@ -156,4 +146,28 @@ export function useEventListener(evenName: string, eventAction: WsEventFunc) {
     },
     []
   );
+}
+
+/**
+ * @description: 用户权限弹窗 鉴权失败后弹出
+ * @return {*}
+ */
+export function useUserAuthModal() {
+  const userAuthModalStatus = authStore((state: any) => state.state);
+  const setUserAuthModalStatus = authStore((state: any) => state.setter);
+
+  return {
+    userAuthModalStatus,
+    setUserAuthModalStatus
+  };
+}
+
+/**
+ * @description: token 初始化
+ * @return {*}
+ */
+export function useToken() {
+  const token = tokenStore((state: any) => state.state);
+  const setToken = tokenStore((state: any) => state.setter);
+  return { token, setToken };
 }

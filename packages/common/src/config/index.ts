@@ -1,7 +1,6 @@
 import { log as logHandler } from "../log";
 import { configTypes, middlewareConfigType, requestConfigType } from "./types";
 import { config } from "./instance";
-import { useToken } from "../state";
 export { config } from "./instance";
 
 function requestConfig(reqConfig: requestConfigType | undefined) {
@@ -27,6 +26,4 @@ export function globalConfig(newConfig: configTypes) {
 
   Object.freeze(config);
   config.log && logHandler.success("[全局配置完成，已冻结配置文件]", config);
-
-  return { useToken };
 }

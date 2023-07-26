@@ -4,7 +4,7 @@ import { LocalStorageKeys } from "./enums";
 import { config } from "./config";
 import { create } from "zustand";
 
-const useTokenStore = create(set => ({
+export const tokenStore = create(set => ({
   state: null,
   setter: (token: string) => {
     if (!token) {
@@ -17,23 +17,46 @@ const useTokenStore = create(set => ({
   }
 }));
 
-const userAuthStore = create(set => ({ state: false }));
+export const authStore = create(set => ({
+  state: false,
+  setter: (auth: boolean) => set(auth)
+}));
 
 export function setUserAuth(auth: boolean | undefined) {
-  userAuthStore.setState({ state: auth });
+  authStore.setState({ state: auth });
 }
 
-export function useUserAuthModal() {
-  const userAuthModalStatus = userAuthStore((state: any) => state.state);
-
-  return {
-    userAuthModalStatus,
-    setUserAuthModalStatus: userAuthStore.setState
-  };
+export interface systemInfoStateType {
+  windowHeight?: number;
+  statusBarHeight?: number;
+  screenHeight?: number;
+  inputHeight?: number;
+  windowWidth?: number;
+  screenWidth?: number;
+}
+interface systemInfoType {
+  state: systemInfoStateType;
+  setter: (val: systemInfoStateType) => any;
 }
 
-export function useToken() {
-  const token = useTokenStore((state: any) => state.state);
-  const setToken = useTokenStore((state: any) => state.setter);
-  return { token, setToken };
+// 系统高度
+export const systemInfoStore = create<systemInfoType>((set: any) => ({
+  state: {
+    windowHeight: 670,
+    statusBarHeight: 20,
+    screenHeight: 736,
+    inputHeight: 0,
+    windowWidth: 414,
+    screenWidth: 414
+  },
+  setter: (val: systemInfoStateType) => set(val)
+}));
+
+interface platformType {
+  state: string | null;
+  setter: (val: string) => any;
 }
+export const platformStore = create<platformType>((set: any) => ({
+  state: null,
+  setter: (val: string) => set(val)
+}));
