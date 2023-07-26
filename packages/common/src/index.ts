@@ -7,3 +7,4 @@ export * from "./log";
 export * from "./ws";
 export * from "./config";
 export { useDebounceFn } from "taro-hooks";
+export * from "./pageStore";

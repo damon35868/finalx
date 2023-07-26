@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useDidShow, getSystemInfo, useReachBottom as useOriginReachBottom, getMenuButtonBoundingClientRect } from "@tarojs/taro";
 import { atom, useAtom } from "jotai";
 import { WsEventFunc, wsClient } from "./ws";
+import { pageSizeStore } from "./pageStore";
 
 /**
  * 页面触底无限滚动
@@ -9,21 +10,21 @@ import { WsEventFunc, wsClient } from "./ws";
  * @param pageKey 分页页码的 storeKey(在搜索，切换tab场景中需将页码置为1)
  * @param varFn 变量函数
  */
-export function useLoadMore(model: any, page: number, varFn?: Function) {
+export function useLoadMore(model: any, pageKey: string, varFn?: Function) {
   const { data, run, mutate, loading } = model;
   const { hasNextPage } = data || {};
-  page = page === 1 ? 2 : page || 1;
+  pageSizeStore[pageKey] = pageSizeStore[pageKey] === 1 ? 2 : pageSizeStore[pageKey] || 1;
 
   // 页面或组件销毁时将页码置为1
   useEffect(() => {
     return () => {
-      page = 1;
+      pageSizeStore[pageKey] = 1;
     };
   }, []);
 
   async function refetchData() {
     if (loading || !hasNextPage) return;
-    await run(varFn ? varFn(page) : { page });
+    await run(varFn ? varFn(pageSizeStore[pageKey]) : { page: pageSizeStore[pageKey] });
 
     mutate((newData: any) => {
       return {
@@ -31,7 +32,7 @@ export function useLoadMore(model: any, page: number, varFn?: Function) {
         items: [...data.items, ...newData.items]
       };
     });
-    page += 1;
+    pageSizeStore[pageKey] += 1;
   }
   useOriginReachBottom(refetchData);
 

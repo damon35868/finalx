@@ -29,13 +29,13 @@ export const NavBar: FC<NavBarProps> = memo(({ title = "", scrollShow, onBack, s
 
   return (
     <View
-      className={classNames("sd_nav-bar", { bg: isScroll })}
       style={{
         height: customNavHeight + "PX",
         paddingTop: statusBarHeight + "PX",
         color: theme === "dark" ? "#333" : "#fff",
         ...style
       }}
+      className={classNames("sd_nav-bar", { bg: isScroll })}
     >
       <View className='sd_nav-bar-content' style={{ height: customNavHeight - statusBarHeight + "PX" }}>
         {showBack && (

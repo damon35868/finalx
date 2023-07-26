@@ -11,6 +11,10 @@
     "build": "npm run clean && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "finalx",
+    "components"
+  ],
   "license": "MIT",
   "files": [
     "dist"
