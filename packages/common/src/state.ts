@@ -6,7 +6,7 @@ import { config } from "./config";
 
 const tokenAtom = atom<null | string>(null);
 
-const userAuthAtom = atom<boolean>(false);
+export const userAuthAtom = atom<boolean>(false);
 export const store = createStore();
 
 export function useToken() {
@@ -18,11 +18,13 @@ export function setUserAuth(auth: boolean | undefined) {
   store.set(userAuthAtom, auth);
 }
 
-export function useUserAuthModal() {
-  const userAuthModalStatus = store.get(userAuthAtom);
+function getUserAuth() {
+  return store.get(userAuthAtom);
+}
 
+export function useUserAuthModal() {
   return {
-    userAuthModalStatus,
+    userAuthModalStatus: getUserAuth(),
     setUserAuthModalStatus: setUserAuth
   };
 }
