@@ -20,7 +20,7 @@ const useTokenStore = create(set => ({
 const userAuthStore = create(set => ({ state: false }));
 
 export function setUserAuth(auth: boolean | undefined) {
-  userAuthStore.setState(auth);
+  userAuthStore.setState({ state: auth });
 }
 
 export function useUserAuthModal() {
