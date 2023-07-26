@@ -3,7 +3,7 @@ import { setItem } from "./utils";
 import { log } from "./log";
 import { LocalStorageKeys } from "./enums";
 import { config } from "./config";
-import { writeAtom } from "jotai-nexus";
+import { readAtom, writeAtom } from "jotai-nexus";
 
 const tokenAtom = atom<null | string>(null);
 
@@ -21,13 +21,10 @@ export function setUserAuth(auth: boolean | undefined) {
   writeAtom(userAuthAtom, auth);
 }
 
-function getUserAuth(): boolean {
-  return store.get(userAuthAtom);
-}
-
 export function useUserAuthModal() {
+  const userAuthModalStatus = readAtom(userAuthAtom);
   return {
-    userAuthModalStatus: getUserAuth(),
+    userAuthModalStatus,
     setUserAuthModalStatus: setUserAuth
   };
 }
