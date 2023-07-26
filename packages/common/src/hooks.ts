@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useDidShow, getSystemInfo, useReachBottom as useOriginReachBottom, getMenuButtonBoundingClientRect } from "@tarojs/taro";
 import { WsEventFunc, wsClient } from "./ws";
 import { pageSizeStore } from "./pageStore";
-import { authStore, platformStore, systemInfoStore, tokenStore } from "./state";
+import { authStore, platformStore, systemInfoStore, initStore } from "./state";
 
 /**
  * 页面触底无限滚动
@@ -163,12 +163,13 @@ export function useUserAuthModal() {
 }
 
 /**
- * @description: token 初始化
+ * @description:  初始化 State
  * @return {*}
  */
-export function useToken() {
-  const token = tokenStore((state: any) => state.state);
-  const setToken = tokenStore((state: any) => state.setter);
+export function useInitState() {
+  const token = initStore((state: any) => state.token);
+  const userInfo = initStore((state: any) => state.userInfo);
+  const setInitState = initStore((state: any) => state.setter);
 
-  return { token, setToken };
+  return { token, userInfo, setInitState };
 }

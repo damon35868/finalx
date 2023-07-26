@@ -4,16 +4,29 @@ import { LocalStorageKeys } from "./enums";
 import { config } from "./config";
 import { create } from "zustand";
 
-export const tokenStore = create(set => ({
-  state: null,
-  setter: (token: string) => {
-    if (!token) {
-      config.log && log.error("[缺少token]");
-      return;
+interface initStateType {
+  token: string | null;
+  userInfo: any | null;
+  setter: (val: { token: string; userInfo: any }) => any;
+}
+
+export const initStore = create<initStateType>(set => ({
+  token: null,
+  userInfo: null,
+  setter: ({ token, userInfo }: { token: string; userInfo: any }) => {
+    if (!token) config.log && log.error("[缺少token]");
+    else {
+      set({ token });
+      setItem(LocalStorageKeys.token, token);
     }
-    set({ state: token });
-    setItem(LocalStorageKeys.token, token);
-    config.log && log.success("[配置TOKEN成功]");
+
+    if (!userInfo) config.log && log.error("[缺少userInfo]");
+    else {
+      set({ userInfo });
+      setItem(LocalStorageKeys.userInfo, userInfo);
+    }
+
+    token && userInfo && config.log && log.success("[初始化State成功]");
   }
 }));
 
@@ -27,12 +40,12 @@ export function setUserAuth(auth: boolean | undefined) {
 }
 
 export interface systemInfoStateType {
-  windowHeight?: number;
-  statusBarHeight?: number;
-  screenHeight?: number;
+  windowHeight: number;
+  statusBarHeight: number;
+  screenHeight: number;
   inputHeight?: number;
-  windowWidth?: number;
-  screenWidth?: number;
+  windowWidth: number;
+  screenWidth: number;
 }
 interface systemInfoType {
   state: systemInfoStateType;

@@ -46,7 +46,7 @@ export const NavBar: FC<NavBarProps> = memo(({ title = "", scrollShow, onBack, s
               routerBack();
             }}
           >
-            {!icon ? <Image className='sd_nav-bar-back-icon' src={theme === "dark" ? darkIcon : lightIcon} /> : icon}
+            {!icon ? <Image className='sd_nav-bar-back-icon' src={theme === "dark" || isScroll ? darkIcon : lightIcon} /> : icon}
           </View>
         )}
 
