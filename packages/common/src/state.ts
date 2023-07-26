@@ -1,14 +1,14 @@
-import { atom, useAtom, createStore } from "jotai";
+import { atom, useAtom, createStore, Provider } from "jotai";
 import { setItem } from "./utils";
 import { log } from "./log";
 import { LocalStorageKeys } from "./enums";
 import { config } from "./config";
-import { writeAtom } from "jotai-nexus";
+import { createElement } from "react";
 
 const tokenAtom = atom<null | string>(null);
 
 const userAuthAtom = atom<boolean>(false);
-const store = createStore();
+export const store = createStore();
 
 export function useToken() {
   const [token] = useAtom<null | string>(tokenAtom);
@@ -16,21 +16,15 @@ export function useToken() {
 }
 
 export function setUserAuth(auth: boolean | undefined) {
-  setItem("userAuth", auth);
-  writeAtom(userAuthAtom, auth);
+  store.set(userAuthAtom, auth);
 }
 
 export function useUserAuthModal() {
-  const [userAuthModalStatus, setFn] = useAtom(userAuthAtom);
-
-  const setUserAuthModalStatus = (auth: boolean) => {
-    setItem("userAuth", auth);
-    setFn(auth);
-  };
+  const userAuthModalStatus = store.get(userAuthAtom);
 
   return {
     userAuthModalStatus,
-    setUserAuthModalStatus
+    setUserAuthModalStatus: setUserAuth
   };
 }
 
@@ -49,3 +43,5 @@ export function useInitToken() {
 
   return setToken;
 }
+
+export const Root = createElement(Provider, { store });

@@ -1,12 +1,10 @@
 export * from "./hooks";
 export * from "./utils";
 export * from "./request";
-export { useToken, setUserAuth, useUserAuthModal } from "./state";
+export { useToken, setUserAuth, useUserAuthModal, Root } from "./state";
 export * from "./helper";
 export * from "./log";
 export * from "./ws";
 export * from "./config";
 export { useDebounceFn } from "taro-hooks";
 export * from "./pageStore";
-import JotaiNexus from "jotai-nexus";
-export const StateRoot = JotaiNexus;
