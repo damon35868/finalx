@@ -4,7 +4,7 @@ import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
 import external from "rollup-plugin-peer-deps-external";
 import dts from "rollup-plugin-dts";
-import babel from "@rollup/plugin-babel";
+// import babel from "@rollup/plugin-babel";
 
 export default [
   {
@@ -15,17 +15,7 @@ export default [
       sourcemap: true,
       name: "finalx-common-esm"
     },
-    plugins: [
-      external(),
-      commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
-      terser(),
-      babel({
-        babelHelpers: "bundled",
-        exclude: "node_modules/**",
-        presets: ["@babel/preset-react"]
-      })
-    ],
+    plugins: [external(), commonjs(), typescript({ tsconfig: "./tsconfig.json" }), terser()],
     external: ["react", "@tarojs/taro", "@tarojs/components"]
   },
   {
@@ -35,18 +25,7 @@ export default [
       format: "cjs",
       sourcemap: true
     },
-    plugins: [
-      external(),
-      resolve(),
-      commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
-      terser(),
-      babel({
-        babelHelpers: "bundled",
-        exclude: "node_modules/**",
-        presets: ["@babel/preset-react"]
-      })
-    ],
+    plugins: [external(), resolve(), commonjs(), typescript({ tsconfig: "./tsconfig.json" }), terser()],
     external: ["react", "@tarojs/taro", "@tarojs/components"]
   },
   {

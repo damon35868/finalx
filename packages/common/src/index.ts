@@ -1,10 +1,11 @@
 export * from "./hooks";
 export * from "./utils";
 export * from "./request";
-export { useToken, setUserAuth, useUserAuthModal, Root } from "./state";
+export { useToken, setUserAuth, useUserAuthModal, store } from "./state";
 export * from "./helper";
 export * from "./log";
 export * from "./ws";
 export * from "./config";
 export { useDebounceFn } from "taro-hooks";
 export * from "./pageStore";
+export { Provider } from "jotai";

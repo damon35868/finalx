@@ -1,9 +1,8 @@
-import { atom, useAtom, createStore, Provider } from "jotai";
+import { atom, useAtom, createStore } from "jotai";
 import { setItem } from "./utils";
 import { log } from "./log";
 import { LocalStorageKeys } from "./enums";
 import { config } from "./config";
-import { createElement } from "react";
 
 const tokenAtom = atom<null | string>(null);
 
@@ -43,5 +42,3 @@ export function useInitToken() {
 
   return setToken;
 }
-
-export const Root = createElement(Provider, { store });
