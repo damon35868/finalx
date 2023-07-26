@@ -8,3 +8,5 @@ export * from "./ws";
 export * from "./config";
 export { useDebounceFn } from "taro-hooks";
 export * from "./pageStore";
+import JotaiNexus from "jotai-nexus";
+export const StateRoot = JotaiNexus;
