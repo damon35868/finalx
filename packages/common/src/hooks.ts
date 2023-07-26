@@ -70,6 +70,7 @@ interface systemInfoType {
   windowWidth: number;
   screenWidth: number;
 }
+
 export function useSystemSize() {
   const [size, setSystemSize]: [systemInfoType, any] = useAtom<systemInfoType>(systemInfoAtom);
 
