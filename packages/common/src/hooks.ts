@@ -166,7 +166,7 @@ export function useUserAuthModal() {
  * @description:  初始化 State
  * @return {*}
  */
-export function useInitState() {
+export function useUserState() {
   const token = initStore((state: any) => state.token);
   const userInfo = initStore((state: any) => state.userInfo);
   const setInitState = initStore((state: any) => state.setter);

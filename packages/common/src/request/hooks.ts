@@ -4,7 +4,7 @@ import { BaseOptions, BaseResult, LoadMoreOptions, PaginatedOptionsWithFormat } 
 import { getItem } from "../utils";
 import { LocalStorageKeys } from "../enums";
 import { config } from "../config";
-import { useInitState } from "../hooks";
+import { useUserState } from "../hooks";
 
 export interface requestOptions {
   url?: string;
@@ -40,7 +40,7 @@ export const useRequest = (
   { url, data, method = "POST", coverUrl }: requestOptions,
   options?: PaginatedOptionsWithFormat<any, any, any> | BaseOptions<any, any> | LoadMoreOptions<any>
 ): BaseResult<any, any> => {
-  const { token: reqToken } = useInitState();
+  const { token: reqToken } = useUserState();
 
   return useQuery(
     (payload: any, option?: { httpUrl: string; token?: string }) => {
