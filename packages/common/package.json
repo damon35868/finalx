@@ -1,6 +1,6 @@
 {
   "name": "@finalx/common",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "description": "",
   "type": "module",
   "main": "dist/index.esm.js",
