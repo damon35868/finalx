@@ -169,5 +169,6 @@ export function useUserAuthModal() {
 export function useToken() {
   const token = tokenStore((state: any) => state.state);
   const setToken = tokenStore((state: any) => state.setter);
+
   return { token, setToken };
 }

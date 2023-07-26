@@ -11,7 +11,7 @@ export const tokenStore = create(set => ({
       config.log && log.error("[缺少token]");
       return;
     }
-    set(token);
+    set({ state: token });
     setItem(LocalStorageKeys.token, token);
     config.log && log.success("[配置TOKEN成功]");
   }
@@ -19,7 +19,7 @@ export const tokenStore = create(set => ({
 
 export const authStore = create(set => ({
   state: false,
-  setter: (auth: boolean) => set(auth)
+  setter: (auth: boolean) => set({ state: auth })
 }));
 
 export function setUserAuth(auth: boolean | undefined) {
@@ -49,7 +49,7 @@ export const systemInfoStore = create<systemInfoType>((set: any) => ({
     windowWidth: 414,
     screenWidth: 414
   },
-  setter: (val: systemInfoStateType) => set(val)
+  setter: (val: systemInfoStateType) => set({ state: val })
 }));
 
 interface platformType {
@@ -58,5 +58,5 @@ interface platformType {
 }
 export const platformStore = create<platformType>((set: any) => ({
   state: null,
-  setter: (val: string) => set(val)
+  setter: (val: string) => set({ state: val })
 }));
