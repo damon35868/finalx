@@ -256,3 +256,13 @@ export function clearRichText(text: string = "") {
   const text4 = text3.replace(/ /g, ""); //去除空格
   return text4;
 }
+
+/**
+ * @description: 转换时间为时间戳
+ * @param {string} time
+ * @return {*}
+ */
+export function formatDateByString(time: string) {
+  const repTime = time.replace(/-/g, "/");
+  return Date.parse(repTime) / 1000; //转时间戳
+}
