@@ -169,7 +169,7 @@ export function useUserAuthModal() {
 export function useUserState() {
   const token = initStore((state: any) => state.token);
   const userInfo = initStore((state: any) => state.userInfo);
-  const setInitState = initStore((state: any) => state.setter);
+  const setUserState = initStore((state: any) => state.setter);
 
-  return { token, userInfo, setInitState };
+  return { token, userInfo, setUserState };
 }

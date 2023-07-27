@@ -13,15 +13,14 @@ interface initStateType {
 export const initStore = create<initStateType>(set => ({
   token: null,
   userInfo: null,
-  setter: ({ token, userInfo }: { token: string; userInfo: any }) => {
-    if (!token) config.log && log.error("[缺少token]");
-    else {
+
+  setter: ({ token, userInfo }: { token?: string; userInfo?: any }) => {
+    if (token) {
       set({ token });
       setItem(LocalStorageKeys.token, token);
     }
 
-    if (!userInfo) config.log && log.error("[缺少userInfo]");
-    else {
+    if (userInfo) {
       set({ userInfo });
       setItem(LocalStorageKeys.userInfo, userInfo);
     }
