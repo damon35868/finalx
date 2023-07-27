@@ -36,7 +36,19 @@ class Helper {
         const { code, message } = res || {};
         if (code === ErrorCode.error) throw new Error(message);
         if (code === -1) {
-          throw new Error(res.msg && typeof res.msg === "object" ? res.msg.message : `${text}失败`);
+          let message = "";
+          if (res.msg) {
+            typeof res.msg === "object" && (message = res.msg.message);
+            if (typeof res.msg === "string") {
+              try {
+                message = JSON.parse(res.msg).message;
+              } catch (e) {
+                message = "网络错误";
+              }
+            }
+          }
+
+          throw new Error(message);
         }
       }
 
