@@ -2,7 +2,6 @@
   "name": "@finalx/common",
   "version": "0.2.21",
   "description": "",
-  "type": "module",
   "main": "dist/index.esm.js",
   "module": "dist/index.cjs.js",
   "types": "dist/index.d.ts",

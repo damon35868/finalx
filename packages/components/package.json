@@ -3,7 +3,6 @@
   "version": "0.2.21",
   "description": "",
   "author": "D.M",
-  "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
