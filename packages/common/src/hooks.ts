@@ -1,8 +1,9 @@
+import { unstable_batchedUpdates } from "react-dom";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useDidShow, getSystemInfo, useReachBottom as useOriginReachBottom, getMenuButtonBoundingClientRect } from "@tarojs/taro";
 import { WsEventFunc, wsClient } from "./ws";
 import { pageSizeStore } from "./pageStore";
-import { authStore, platformStore, systemInfoStore, initStore } from "./state";
+import { authStore, platformStore, systemInfoStore, initStore, systemInfoStateType } from "./state";
 
 /**
  * 页面触底无限滚动
@@ -58,13 +59,26 @@ export function useSystemSize() {
   const setSystemSize = systemInfoStore(store => store.setter);
 
   let { windowHeight, screenHeight } = size;
-  return { ...size, customNavHeight: screenHeight - windowHeight, setSystemSize };
+  return {
+    ...size,
+    customNavHeight: screenHeight - windowHeight,
+    setSystemSize: (val: systemInfoStateType) =>
+      unstable_batchedUpdates(() => {
+        setSystemSize(val);
+      })
+  };
 }
 
 export function useSystem() {
   const system = platformStore(store => store.state);
   const setSystem = platformStore(store => store.setter);
-  return { system, setSystem };
+  return {
+    system,
+    setSystem: (val: string) =>
+      unstable_batchedUpdates(() => {
+        setSystem(val);
+      })
+  };
 }
 
 /**
@@ -158,7 +172,10 @@ export function useUserAuthModal() {
 
   return {
     userAuthModalStatus,
-    setUserAuthModalStatus
+    setUserAuthModalStatus: (val: boolean) =>
+      unstable_batchedUpdates(() => {
+        setUserAuthModalStatus(val);
+      })
   };
 }
 
@@ -171,5 +188,12 @@ export function useUserState() {
   const userInfo = initStore((state: any) => state.userInfo);
   const setUserState = initStore((state: any) => state.setter);
 
-  return { token, userInfo, setUserState };
+  return {
+    token,
+    userInfo,
+    setUserState: (val: { token: string; userInfo: any }) =>
+      unstable_batchedUpdates(() => {
+        setUserState(val);
+      })
+  };
 }
