@@ -14,7 +14,8 @@
     "dist"
   ],
   "keywords": [
-    "finalx"
+    "finalx",
+    "middleware"
   ],
   "author": "D.M",
   "license": "MIT",
