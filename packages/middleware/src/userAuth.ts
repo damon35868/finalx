@@ -17,7 +17,10 @@ export enum permissionsType {
 class UserAuth {
   private level = permissionsType.ALL;
   private lastCb: Function | undefined;
-  private userInfo = getItem(LocalStorageKeys.userInfo);
+
+  get userInfo() {
+    return getItem(LocalStorageKeys.userInfo);
+  }
 
   get filterKey() {
     const newFilterKey = !isEmpty(config.middleware?.userAuth.filterKey)
@@ -89,14 +92,12 @@ class UserAuth {
   }
 
   getUserPermission() {
-    const userInfo = this.userInfo || getItem(LocalStorageKeys.userInfo);
-    const info = userInfo[this.filterKey.info];
+    const info = this.userInfo[this.filterKey.info];
     return !!info;
   }
 
   public getPhonePermission(): boolean {
-    const userInfo = this.userInfo || getItem(LocalStorageKeys.userInfo);
-    const mobilePhone = userInfo[this.filterKey.phone];
+    const mobilePhone = this.userInfo[this.filterKey.phone];
     return !!mobilePhone;
   }
 }
