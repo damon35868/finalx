@@ -191,7 +191,7 @@ export function useUserState() {
   return {
     token,
     userInfo,
-    setUserState: (val: { token: string; userInfo: any }) =>
+    setUserState: (val: { token?: string; userInfo?: any }) =>
       unstable_batchedUpdates(() => {
         setUserState(val);
       })

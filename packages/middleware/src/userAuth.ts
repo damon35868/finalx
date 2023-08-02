@@ -20,12 +20,20 @@ class UserAuth {
   private userInfo = getItem(LocalStorageKeys.userInfo);
 
   get filterKey() {
-    return !isEmpty(config.middleware?.userAuth.filterKey)
+    const newFilterKey = !isEmpty(config.middleware?.userAuth.filterKey)
       ? config.middleware?.userAuth.filterKey
       : {
           phone: "mobilePhone",
           info: "name"
         };
+
+    return Object.assign(
+      {
+        phone: "mobilePhone",
+        info: "name"
+      },
+      newFilterKey
+    );
   }
 
   /**

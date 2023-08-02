@@ -7,7 +7,7 @@ import { create } from "zustand";
 interface initStateType {
   token: string | null;
   userInfo: any | null;
-  setter: (val: { token: string; userInfo: any }) => any;
+  setter: (val: { token?: string; userInfo?: any }) => any;
 }
 
 export const initStore = create<initStateType>(set => ({
