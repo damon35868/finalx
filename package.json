@@ -26,9 +26,9 @@
 	"author": "",
 	"dependencies": {
 		"@babel/runtime": "^7.7.7",
-		"@finalx/common": "^0.2.9",
-		"@finalx/components": "^0.2.9",
-		"@finalx/middleware": "^0.2.9",
+		"@finalx/common": "^1.0.8",
+		"@finalx/components": "^1.0.8",
+		"@finalx/middleware": "^1.0.8",
 		"@fower/taro": "^1.82.0",
 		"@tarojs/components": "3.6.8",
 		"@tarojs/plugin-framework-react": "3.6.8",
