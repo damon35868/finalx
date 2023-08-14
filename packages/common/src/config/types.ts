@@ -9,6 +9,7 @@ export interface requestConfigType {
   wsUrl?: string;
   header?: any;
   timeout?: number;
+  wsCheckUser?: boolean;
   bearerToken?: boolean;
 }
 

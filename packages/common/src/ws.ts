@@ -38,7 +38,6 @@ export interface WsHandler {
 }
 
 class WS implements Ws {
-  public userId: number | null | undefined;
   public client: SocketTask = {} as SocketTask;
   public inited: boolean | undefined;
   private subscribeEvents: { [key: string]: SubscribeEvent } = {};
@@ -49,6 +48,12 @@ class WS implements Ws {
   public emitter: any;
   private lastPongTIme: number = 0;
   private initTimer: any;
+
+  public get userId() {
+    const userInfo = getItem("userInfo") || {};
+    const { id } = userInfo || {};
+    return id;
+  }
 
   constructor() {
     this.initTimer = setInterval(() => {
@@ -143,7 +148,10 @@ class WS implements Ws {
         }
 
         const { userId } = JSON.parse(event.Data || "{}");
-        if (this.userId === userId) {
+
+        if (config.request.wsCheckUser) {
+          if (this.userId === userId) this.emitter.emit(event.EventName, event);
+        } else {
           this.emitter.emit(event.EventName, event);
         }
 
@@ -168,7 +176,6 @@ class WS implements Ws {
   }
 
   onClose(): void {
-    // this.userId = null
     this.client.onClose(_ => {
       this.client.close({
         code: 3001,
@@ -187,9 +194,8 @@ class WS implements Ws {
     }
   }
 
-  subscribe(channel: string, data: any, userId: number): void {
+  subscribe(channel: string, data: any): void {
     let timer: any;
-    this.userId = userId;
     timer = setInterval(() => {
       if (!this.client || this.client.readyState !== 1) {
         return;

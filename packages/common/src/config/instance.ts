@@ -6,7 +6,8 @@ class Config implements configTypes {
   request: requestConfigType = {
     wsUrl: "",
     baseUrl: "",
-    timeout: 300000
+    timeout: 300000,
+    wsCheckUser: true
   };
 }
 
