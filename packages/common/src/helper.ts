@@ -26,38 +26,42 @@ class Helper {
     onError?: (err: any) => any;
     showToast?: boolean;
     rule?: () => boolean;
-  }) {
-    try {
-      const res = await apiFn();
+  }): Promise<any> {
+    return new Promise(async (resove, reject) => {
+      try {
+        const res = await apiFn();
 
-      if (rule) {
-        if (!rule()) throw new Error(res.msg && typeof res.msg === "object" ? res.msg.message : `${text}失败`);
-      } else {
-        const { code, message } = res || {};
-        if (code === ErrorCode.error) throw new Error(message);
-        if (code === -1) {
-          let message = "";
-          if (res.msg) {
-            typeof res.msg === "object" && (message = res.msg.message);
-            if (typeof res.msg === "string") {
-              try {
-                message = JSON.parse(res.msg).message;
-              } catch (e) {
-                message = "网络错误";
+        if (rule) {
+          if (!rule()) throw new Error(res.msg && typeof res.msg === "object" ? res.msg.message : `${text}失败`);
+        } else {
+          const { code, message } = res || {};
+          if (code === ErrorCode.error) throw new Error(message);
+          if (code === -1) {
+            let message = "";
+            if (res.msg) {
+              typeof res.msg === "object" && (message = res.msg.message);
+              if (typeof res.msg === "string") {
+                try {
+                  message = JSON.parse(res.msg).message;
+                } catch (e) {
+                  message = "网络错误";
+                }
               }
             }
+
+            throw new Error(message);
           }
-
-          throw new Error(message);
         }
-      }
 
-      callback && callback(res);
-      showToast && text && toast(`${text}成功`);
-    } catch (e: any) {
-      onError && onError(e);
-      showToast && toast(errorText || e.message);
-    }
+        resove(res);
+        callback && callback(res);
+        showToast && text && toast(`${text}成功`);
+      } catch (e: any) {
+        reject(e);
+        onError && onError(e);
+        showToast && toast(errorText || e.message);
+      }
+    });
   }
 }
 
