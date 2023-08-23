@@ -55,6 +55,6 @@ export const useRequest = (
         url: httpUrl || coverUrl || String(config.request?.baseUrl) + url
       });
     },
-    { ...(options as any), ready: reqToken && !!config.request?.baseUrl }
+    { ...(options as any), ready: reqToken && !!config.request?.baseUrl && ((options || {}).hasOwnProperty("ready") ? options.ready : true) }
   );
 };

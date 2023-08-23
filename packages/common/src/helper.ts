@@ -25,14 +25,14 @@ class Helper {
     callback?: (res: any) => any;
     onError?: (err: any) => any;
     showToast?: boolean;
-    rule?: () => boolean;
+    rule?: (val?: any) => boolean;
   }): Promise<any> {
     return new Promise(async (resove, reject) => {
       try {
         const res = await apiFn();
 
         if (rule) {
-          if (!rule()) throw new Error(res.msg && typeof res.msg === "object" ? res.msg.message : `${text}失败`);
+          if (!rule(res)) throw new Error(res.msg && typeof res.msg === "object" ? res.msg.message : `${text}失败`);
         } else {
           const { code, message } = res || {};
           if (code === ErrorCode.error) throw new Error(message);
