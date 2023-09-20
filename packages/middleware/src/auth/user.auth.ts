@@ -1,12 +1,6 @@
 import { getItem, setUserAuth, config, isEmpty } from "@finalx/common";
-import { LocalStorageKeys } from "./enums";
-
-// interface UserAuthConfig {
-//   filterKey?: {
-//     phone: string;
-//     info: string;
-//   };
-// }
+import { LocalStorageKeys } from "../enums";
+import { BaseAuth } from "./base.auth";
 
 export enum permissionsType {
   ALL = 0,
@@ -14,15 +8,16 @@ export enum permissionsType {
   PHONE = 2
 }
 
-class UserAuth {
-  private level = permissionsType.ALL;
-  private lastCb: Function | undefined;
+class UserAuth extends BaseAuth {
+  constructor() {
+    super(permissionsType.ALL);
+  }
 
-  get userInfo() {
+  private get userInfo() {
     return getItem(LocalStorageKeys.userInfo);
   }
 
-  get filterKey() {
+  private get filterKey() {
     const newFilterKey = !isEmpty(config.middleware?.userAuth.filterKey)
       ? config.middleware?.userAuth.filterKey
       : {
@@ -43,10 +38,10 @@ class UserAuth {
    * @description: 查看授权
    * @return {*}
    */
-  checkUserAuth(cb?: Function, errcb?: Function, lv?: permissionsType): boolean {
+  public check(cb?: Function, errcb?: Function, lv?: permissionsType): boolean {
     cb && this.setLastCb(cb);
     const level = lv || this.level;
-    const hasAuth = this.getUserPermissions(level);
+    const hasAuth = this.getPermission(level);
 
     setUserAuth(!hasAuth);
 
@@ -64,23 +59,15 @@ class UserAuth {
     return false;
   }
 
-  setLastCb(cb: Function) {
-    this.lastCb = () => {
-      cb();
-      this.lastCb = undefined;
-    };
-    return true;
-  }
-
-  getUserPermissions(lv?: permissionsType) {
+  public getPermission(lv?: permissionsType) {
     const level = lv || this.level;
 
     switch (level) {
       case permissionsType.ALL: {
-        return this.getUserPermission() && this.getPhonePermission();
+        return this.getInfoPermission() && this.getPhonePermission();
       }
       case permissionsType.USER: {
-        return this.getUserPermission();
+        return this.getInfoPermission();
       }
       case permissionsType.PHONE: {
         return this.getPhonePermission();
@@ -91,12 +78,12 @@ class UserAuth {
     }
   }
 
-  getUserPermission() {
+  private getInfoPermission() {
     const info = this.userInfo[this.filterKey.info];
     return !!info;
   }
 
-  public getPhonePermission(): boolean {
+  private getPhonePermission(): boolean {
     const mobilePhone = this.userInfo[this.filterKey.phone];
     return !!mobilePhone;
   }

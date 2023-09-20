@@ -80,15 +80,15 @@ export function getQueryVariable(query: string, variable: string, isExclude?: bo
  * @return {*}
  */
 export const changeNumToHan = (num: number) => {
-  let arr1 = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
-  let arr2 = ["", "十", "百", "千", "万", "十", "百", "千", "亿", "十", "百", "千", "万", "十", "百", "千", "亿"];
+  const arr1 = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+  const arr2 = ["", "十", "百", "千", "万", "十", "百", "千", "亿", "十", "百", "千", "万", "十", "百", "千", "亿"];
   if (!num || isNaN(num)) return "零";
-  let english = num.toString().split("");
+  const english = num.toString().split("");
   let result = "";
   for (let i = 0; i < english.length; i++) {
-    let des_i = english.length - 1 - i; // 倒序排列设值
+    const des_i = english.length - 1 - i; // 倒序排列设值
     result = arr2[i] + result;
-    let arr1_index = english[des_i];
+    const arr1_index = english[des_i];
     result = arr1[arr1_index as unknown as number] + result;
   }
   result = result.replace(/零(千|百|十)/g, "零").replace(/十零/g, "十"); // 将【零千、零百】换成【零】 【十零】换成【十】
@@ -225,17 +225,26 @@ export function setItem(key: string, data: any) {
 export function routerBack(opt?: any) {
   navigateBack({
     ...opt,
-    fail() {
-      reLaunch({ url: "/pages/index/index" });
-    }
+    fail: () => reLaunch({ url: "/pages/index/index" })
   });
 }
 
-// 生成随机数
-const randomNum = (min: number, max: number) => {
+/**
+ * @description: 生成随机数
+ * @param {number} min 最小范围值
+ * @param {number} max 最大范围值
+ * @return {*}
+ */
+export const randomNum = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
+/**
+ * @description: 获取随机颜色
+ * @param {number} min RGB最小范围值
+ * @param {number} max RGB最大范围值
+ * @return {*}
+ */
 export const getRandomColor = (min: number, max: number) => {
   let r = randomNum(min, max);
   let g = randomNum(min, max);

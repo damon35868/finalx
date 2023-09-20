@@ -12,6 +12,15 @@ commander
     require("./init.js")(name, options);
   });
 
+// TODO 生成文件，包含业务层、请求层、页面
+// commander
+//   .command("gen <name>")
+//   .description("初始化项目")
+//   .option("-f, --force", "覆盖目标文件夹（如果存在）")
+//   .action((name, options) => {
+//     require("./init.js")(name, options);
+//   });
+
 commander.on("--help", () => {
   console.log(
     "\r\n" +

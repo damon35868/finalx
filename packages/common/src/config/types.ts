@@ -14,7 +14,7 @@ export interface requestConfigType {
 }
 
 export interface middlewareConfigType {
-  userAuth: {
+  userAuth?: {
     filterKey?: {
       phone?: string;
       info?: string;

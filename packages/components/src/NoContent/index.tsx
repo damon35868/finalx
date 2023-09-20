@@ -46,11 +46,9 @@ export const NoContentRect: FC<NoContentRectProps> = ({
   imgStyle,
   children
 }) => {
-  const { data } = model || {};
-
-  const { hasNextPage = true } = data || {};
-
-  if (hasNextPage) return null;
+  const { data } = model;
+  const { totalCount = 1 } = data || {};
+  if (totalCount) return null;
 
   return (
     <View className='no-content-rect' style={style}>

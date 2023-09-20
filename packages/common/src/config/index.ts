@@ -17,8 +17,8 @@ function middlewareConfig(middleware: middlewareConfigType | undefined) {
   config.log && logHandler.success("[配置中间件成功]");
 }
 
-export function globalConfig(newConfig: configTypes) {
-  const { request, middleware, log } = newConfig || {};
+export function globalConfig(configVal: configTypes) {
+  const { request, middleware, log } = configVal || {};
 
   Object.assign(config, { log });
   middlewareConfig(middleware);

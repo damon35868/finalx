@@ -31,9 +31,7 @@ export function apiServer({ url, data, method = "POST", coverUrl }: requestProps
         if (statusCode === 200) return resolve(res.data);
         reject("网络错误");
       },
-      fail: e => {
-        reject(e);
-      }
+      fail: e => reject(e)
     });
   });
 }

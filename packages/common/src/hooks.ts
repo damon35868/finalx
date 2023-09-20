@@ -54,6 +54,26 @@ export function useShowFetch(model: any, opt = {}, cb?: () => any) {
   });
 }
 
+/**
+ * @description: 用户系统类型
+ * @return {*}
+ */
+export function useSystem() {
+  const system = platformStore(store => store.state);
+  const setSystem = platformStore(store => store.setter);
+  return {
+    system,
+    setSystem: (val: string) =>
+      unstable_batchedUpdates(() => {
+        setSystem(val);
+      })
+  };
+}
+
+/**
+ * @description: 系统尺寸存储
+ * @return {*}
+ */
 export function useSystemSize() {
   const size = systemInfoStore(store => store.state);
   const setSystemSize = systemInfoStore(store => store.setter);
@@ -65,18 +85,6 @@ export function useSystemSize() {
     setSystemSize: (val: systemInfoStateType) =>
       unstable_batchedUpdates(() => {
         setSystemSize(val);
-      })
-  };
-}
-
-export function useSystem() {
-  const system = platformStore(store => store.state);
-  const setSystem = platformStore(store => store.setter);
-  return {
-    system,
-    setSystem: (val: string) =>
-      unstable_batchedUpdates(() => {
-        setSystem(val);
       })
   };
 }

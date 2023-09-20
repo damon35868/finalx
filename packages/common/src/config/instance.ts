@@ -1,9 +1,9 @@
 import { configTypes, middlewareConfigType, requestConfigType } from "./types";
 
 class Config implements configTypes {
-  log = false;
-  middleware: middlewareConfigType = { userAuth: {} };
-  request: requestConfigType = {
+  public log: boolean = false;
+  public middleware: middlewareConfigType = { userAuth: {} };
+  public request: requestConfigType = {
     wsUrl: "",
     baseUrl: "",
     timeout: 300000,
@@ -11,4 +11,4 @@ class Config implements configTypes {
   };
 }
 
-export const config = new Config();
+export const config: Config = new Config();
