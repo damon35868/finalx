@@ -1,6 +1,6 @@
 import { BaseAuth } from "./base.auth";
 
-export enum permissionsType {
+export enum roleAuthPermissionsType {
   ADMIN = 0,
   USER = 1
 }
@@ -10,7 +10,7 @@ export enum permissionsType {
  * @return {*}
  */
 class RoleAuth extends BaseAuth {
-  check(cb?: Function, errcb?: Function, lv?: permissionsType): boolean {
+  check(cb?: Function, errcb?: Function, lv?: roleAuthPermissionsType): boolean {
     const level = lv || this.level;
 
     switch (level) {

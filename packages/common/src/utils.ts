@@ -102,13 +102,18 @@ export const changeNumToHan = (num: number) => {
 };
 
 /**
- * @description: 是否为空
- * @param {any} variable
+ * @description: 判断值是否为空
+ * @param {any} variable 原始数据
+ * @param {boolean} strict 严格匹配 | 开启则不匹配字符串的假值，默认关闭
  * @return {*}
  */
-export function isEmpty(variable: any) {
-  const emptys = ["", undefined, "undefined", null, "null", false, "false", "{}"];
-  return typeof variable === "object" && variable !== null ? (Object.values(variable).length ? false : true) : emptys.includes(variable) || false;
+export function isEmpty(variable: any, strict?: boolean) {
+  const strictEmptys = ["", 0, NaN, false, null, undefined];
+  const broadEmptys = ["0", "NaN", "false", "null", "undefined", "{}"];
+
+  const emptys = strictEmptys.concat(strict ? [] : broadEmptys);
+
+  return typeof variable === "object" && variable !== null ? !Object.values(variable).length : emptys.includes(variable);
 }
 
 /**
@@ -253,7 +258,7 @@ export const getRandomColor = (min: number, max: number) => {
 };
 
 /**
- * @description: 清楚富文本中的图片、空格等
+ * @description: 清除富文本中的图片、空格等
  * @param {string} text
  * @return {*}
  */

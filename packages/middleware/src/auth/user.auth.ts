@@ -2,7 +2,7 @@ import { getItem, setUserAuth, config, isEmpty } from "@finalx/common";
 import { LocalStorageKeys } from "../enums";
 import { BaseAuth } from "./base.auth";
 
-export enum permissionsType {
+export enum userAuthPermissionsType {
   ALL = 0,
   USER = 1,
   PHONE = 2
@@ -10,7 +10,7 @@ export enum permissionsType {
 
 class UserAuth extends BaseAuth {
   constructor() {
-    super(permissionsType.ALL);
+    super(userAuthPermissionsType.ALL);
   }
 
   private get userInfo() {
@@ -38,7 +38,7 @@ class UserAuth extends BaseAuth {
    * @description: 查看授权
    * @return {*}
    */
-  public check(cb?: Function, errcb?: Function, lv?: permissionsType): boolean {
+  public check(cb?: Function, errcb?: Function, lv?: userAuthPermissionsType): boolean {
     cb && this.setLastCb(cb);
     const level = lv || this.level;
     const hasAuth = this.getPermission(level);
@@ -59,17 +59,17 @@ class UserAuth extends BaseAuth {
     return false;
   }
 
-  public getPermission(lv?: permissionsType) {
+  public getPermission(lv?: userAuthPermissionsType) {
     const level = lv || this.level;
 
     switch (level) {
-      case permissionsType.ALL: {
+      case userAuthPermissionsType.ALL: {
         return this.getInfoPermission() && this.getPhonePermission();
       }
-      case permissionsType.USER: {
+      case userAuthPermissionsType.USER: {
         return this.getInfoPermission();
       }
-      case permissionsType.PHONE: {
+      case userAuthPermissionsType.PHONE: {
         return this.getPhonePermission();
       }
 

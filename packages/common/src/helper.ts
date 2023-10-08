@@ -36,7 +36,7 @@ class Helper {
         } else {
           const { code, message } = res || {};
           if (code === ErrorCode.error) throw new Error(message);
-          if (code === -1) {
+          if (code === ErrorCode.server) {
             let message = "";
             if (res.msg) {
               typeof res.msg === "object" && (message = res.msg.message);

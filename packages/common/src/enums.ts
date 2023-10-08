@@ -4,5 +4,6 @@ export enum LocalStorageKeys {
 }
 
 export enum ErrorCode {
+  server = -1,
   error = "100001"
 }
