@@ -1,32 +1,23 @@
-import { View } from "@tarojs/components";
-import { FC, ReactElement, useEffect, useRef, useState } from "react";
-import { form as formObj } from "./form";
+import React, { FC, ReactElement, Ref, useEffect, useImperativeHandle, useState } from "react";
+import { Form as FormObj } from "./form";
 import { FormContext } from "./context";
-import { Observer, Provider } from "mobx-react";
 
 export const Form: FC<{
+  formRef?: Ref<FormObj>;
   children: ReactElement | ReactElement[];
-  form?: any;
   initFields?: { [key: string]: any };
   onChange?: (val: any) => any;
-}> = ({ form, children, initFields, onChange }) => {
+}> = ({ formRef, children, initFields, onChange }) => {
+  const [form, setForm] = useState<FormObj>();
+
   useEffect(() => {
-    formObj.initData({
-      content: children,
-      initFields,
-    });
+    if (form) return;
+    setForm(new FormObj(children, initFields));
   }, []);
 
-  return (
-    <Provider form={formObj}>
-      <FormContext.Provider
-        value={{
-          form: formObj,
-          onChange,
-        }}
-      >
-        <Observer>{() => <View>{children}</View>}</Observer>
-      </FormContext.Provider>
-    </Provider>
-  );
+  useImperativeHandle(formRef, () => form as FormObj, [form]);
+
+  if (!form) return null;
+
+  return <FormContext.Provider value={{ onChange, form }}>{children}</FormContext.Provider>;
 };

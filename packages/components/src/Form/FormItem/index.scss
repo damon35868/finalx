@@ -23,7 +23,10 @@ $errorColor: #eb0432;
   }
 
   &.between {
-    input {
+    input,
+    picker,
+    radio,
+    radio-group {
       font-size: 32rpx;
       text-align: right;
     }

@@ -1,16 +1,9 @@
-import {
-  FC,
-  ReactElement,
-  cloneElement,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { Button, Label, View } from "@tarojs/components";
+import React, { FC, ReactElement, cloneElement, useContext, useEffect, useState } from "react";
+import { Label, View } from "@tarojs/components";
 import "./index.scss";
 import { FormItemType } from "./types";
 import { FormContext } from "../context";
+export * from "./types";
 
 export const FormItem: FC<FormItemType> = ({
   label,
@@ -20,130 +13,57 @@ export const FormItem: FC<FormItemType> = ({
   children,
   required,
   layout = "between",
-  rules,
+  rules
 }) => {
-  const tagType = children.type;
   const [value, setValue] = useState("");
   const [actionName, setAction] = useState("");
   const { form, onChange } = useContext(FormContext);
+  const [errMsg, setErrMsg] = useState<string>("");
 
-  // useEffect(() => {
-  //   const field = form.getField(name);
-  //   if (field.value) setValue(field.value);
-  // }, []);
-
-  const error = form.getError(name);
-  const { errMsg } = error || {};
+  // init
+  useEffect(() => {
+    form.initFn(name, { errMsg, setErrMsg, value, setValue });
+  }, [value, name, setErrMsg]);
 
   useEffect(() => {
     let fnName = "onChange";
+    const inputMap = ["input", "textarea"];
+    const otherMap = ["switch", "radio", "radio-group", "picker", "checkbox"];
 
-    switch (tagType) {
-      case "input":
-      case "textarea":
-        fnName = "onInput";
-        break;
-      case "switch":
-      case "radio":
-      case "picker":
-      case "checkbox":
-        fnName = "onChange";
-        break;
-      default:
-    }
+    inputMap.includes(children.type as string) && (fnName = "onInput");
+    otherMap.includes(children.type as string) && (fnName = "onChange");
+
     actionName !== fnName && setAction(fnName);
   }, [children]);
 
-  const actionFn =
-    // useCallback(
-    (e: any) => {
-      const val = e.detail.value;
+  const actionFn = (e: any) => {
+    const val = e.detail.value;
 
-      setValue(val);
-      value && setValue(val);
-      form.setField(name, val);
+    setValue(val);
+    value && setValue(val);
+    form.setField(name, val);
 
-      onChange && onChange(form.getFields());
+    onChange && onChange(form.getFields());
 
-      checkError(val);
-    };
-  // , []);
-
-  const checkError = (val: any) => {
-    if (!required) return;
-    form.clearError(name);
-    if (!val) {
-      form.setError(name, `请输入${label}`);
-      return;
-    }
-
-    if (!rules) return;
-    if (Array.isArray(rules)) {
-      for (let i = 0; i < rules.length; i++) {
-        const msg = typeValidate(rules[i], val);
-        form.clearError(name);
-        msg && form.setError(name, msg);
-      }
-      return;
-    }
-
-    const msg = typeValidate(rules, val);
-    form.clearError(name);
-    msg && form.setError(name, msg);
-  };
-
-  const customValidate = (val: any, customFn: Function) => {
-    return customFn(val);
-  };
-
-  const typeValidate = (rule, val) => {
-    const { type, message, custom } = rule || {};
-    if (custom) {
-      if (!customValidate(val, custom))
-        return message || "不满足自定义校验条件";
-      return "";
-    }
-
-    switch (type) {
-      case "email": {
-        const emailReg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-        if (!emailReg.test(val)) return message || "请输入正确的邮箱地址";
-        return "";
-      }
-      case "phone": {
-        const phoneReg = /^[1]([3-9])[0-9\s]{9}$/;
-        if (!phoneReg.test(val)) return message || "请输入正确的手机号码";
-        return "";
-      }
-    }
+    form.validateField(name);
   };
 
   const itemEl = cloneElement(children as ReactElement, {
-    // value,
+    value,
     ...children.props,
     [actionName]: actionFn,
+    ...(children.type === "picker" ? { children: value || `请选择${label}` } : {})
   });
 
   return (
     <View className={`form-item ${layout}`}>
-      <Label
-        style={{ fontSize: labelSize, color: labelColor }}
-        className="form-item-label"
-      >
+      <Label style={{ fontSize: labelSize, color: labelColor }} className='form-item-label'>
         {label}
-        {(required || !!rules) && <View className="required-icon">*</View>}
+        {(required || !!rules) && <View className='required-icon'>*</View>}
       </Label>
-      <View className="form-item-content">{itemEl}</View>
+      <View className='form-item-content'>{itemEl}</View>
 
-      <View className="form-item-error">{errMsg}</View>
-      <Button
-        onClick={() => {
-          form.clearErrors();
-          console.log(form.getErrors());
-        }}
-      >
-        清理
-      </Button>
+      <View className='form-item-error'>{errMsg}</View>
     </View>
   );
 };
