@@ -7,8 +7,7 @@
   "types": "dist/index.d.ts",
   "keywords": [
     "finalx",
-    "common",
-    "hexin"
+    "common"
   ],
   "author": "",
   "license": "MIT",
