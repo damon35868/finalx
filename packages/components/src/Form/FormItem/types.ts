@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 export interface FormItemType {
   label?: string;
   name: string;
-  labelHeight?: string;
+  itemHeight?: string;
   labelSize?: string;
   labelColor?: string;
   required?: boolean;

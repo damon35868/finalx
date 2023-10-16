@@ -4,13 +4,13 @@ import { FormItemType } from "./types";
 import { FormContext } from "../context";
 export * from "./types";
 
-export const FormItem: FC<FormItemType> = ({ label, labelHeight, labelSize, labelColor, name, children, required, rules }) => {
+export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, labelColor, name, children, required, rules }) => {
   const [value, setValue] = useState("");
   const [actionName, setAction] = useState("");
   const {
     form,
     onChange,
-    labelHeight: formLabelHeight = "128rpx",
+    itemHeight: formItemHeight = "128rpx",
     labelSize: formLabelSize = "32rpx",
     labelColor: formLabelColor = "#333"
   } = useContext(FormContext);
@@ -52,11 +52,8 @@ export const FormItem: FC<FormItemType> = ({ label, labelHeight, labelSize, labe
   });
 
   return (
-    <View className='form-item'>
-      <Label
-        style={{ height: labelHeight || formLabelHeight, fontSize: labelSize || formLabelSize, color: labelColor || formLabelColor }}
-        className='form-item-label'
-      >
+    <View className='form-item' style={{ height: itemHeight || formItemHeight }}>
+      <Label style={{ fontSize: labelSize || formLabelSize, color: labelColor || formLabelColor }} className='form-item-label'>
         {label}
         {(required || !!rules) && <View className='required-icon'>*</View>}
       </Label>

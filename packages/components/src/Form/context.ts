@@ -4,7 +4,7 @@ import { Form } from "./form";
 export const FormContext = createContext<{
   form: Form;
   onChange: Function | undefined;
-  labelHeight?: string;
+  itemHeight?: string;
   labelSize?: string;
   labelColor?: string;
 }>({} as any);
