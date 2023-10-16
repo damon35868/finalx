@@ -222,7 +222,7 @@ export class Form {
       this.clearError(name);
       const val = (this.fields.find(item => item.name === name) || {}).value;
 
-      if (!val) {
+      if (required && !val) {
         msg = `请输入${label}`;
       } else if (rules) {
         if (Array.isArray(rules)) {

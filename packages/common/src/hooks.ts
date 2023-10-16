@@ -12,7 +12,7 @@ import { authStore, platformStore, systemInfoStore, initStore, systemInfoStateTy
  * @param varFn 变量函数
  */
 export function useLoadMore(model: any, pageKey: string, varFn?: Function) {
-  const { data, run, mutate, loading } = model;
+  const { data, run, mutate, loading, params = [{}] } = model || {};
   const { hasNextPage } = data || {};
   pageSizeStore[pageKey] = pageSizeStore[pageKey] === 1 ? 2 : pageSizeStore[pageKey] || 1;
 
@@ -25,7 +25,7 @@ export function useLoadMore(model: any, pageKey: string, varFn?: Function) {
 
   async function refetchData() {
     if (loading || !hasNextPage) return;
-    await run(varFn ? varFn(pageSizeStore[pageKey]) : { page: pageSizeStore[pageKey] });
+    await run(varFn ? varFn(pageSizeStore[pageKey]) : { ...params[0], page: pageSizeStore[pageKey] });
 
     mutate((newData: any) => {
       return {
