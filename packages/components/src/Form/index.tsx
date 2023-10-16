@@ -3,6 +3,7 @@ import { Form as FormObj } from "./form";
 import { FormContext } from "./context";
 import { View } from "@tarojs/components";
 import "./index.scss";
+export * from "./form";
 
 export const Form: FC<{
   formRef?: Ref<FormObj>;

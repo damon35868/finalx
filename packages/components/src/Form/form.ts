@@ -8,7 +8,7 @@ interface subKeyType {
 }
 
 export class Form {
-  public formItemObj: { [key: string]: subKeyType } = {};
+  private formItemObj: { [key: string]: subKeyType } = {};
 
   private fields: any[] = [];
 
