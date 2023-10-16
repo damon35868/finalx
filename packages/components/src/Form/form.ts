@@ -173,18 +173,21 @@ export class Form {
    * @return {*}
    */
   public async validateFields() {
+    const fieldsObj = {};
     return new Promise(async (resove, reject) => {
       try {
         if (Array.isArray(this.children)) {
           const errorPromise = this.children.map(none => this.checkError(none.props));
 
           await Promise.all(errorPromise);
-          resove(this.fields);
+          this.fields.forEach(item => (fieldsObj[item.name] = item.value));
+          resove(fieldsObj);
           return;
         }
 
         await this.checkError(this.children.props);
-        resove(this.fields);
+        this.fields.forEach(item => (fieldsObj[item.name] = item.value));
+        resove(fieldsObj);
       } catch (e) {
         reject(e);
       }
@@ -196,6 +199,7 @@ export class Form {
    * @return {*}
    */
   public validateField(name: string) {
+    const fieldsObj = {};
     return new Promise(async (resove, reject) => {
       try {
         const childNodes: ReactElement[] = Array.isArray(this.children) ? this.children : [this.children];
@@ -204,7 +208,9 @@ export class Form {
         await this.checkError(childNode?.props);
 
         const field = this.fields.find(item => item.name === name);
-        resove(field);
+        fieldsObj[field.name] = field.value;
+
+        resove(fieldsObj);
       } catch (e) {
         reject(e);
       }
