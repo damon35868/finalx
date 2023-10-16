@@ -14,10 +14,7 @@ export class Form {
 
   private errors: any[] = [];
 
-  constructor(
-    private children: ReactElement | ReactElement[],
-    private initFields: { [key: string]: any } = {}
-  ) {
+  constructor(private children: ReactElement | ReactElement[], private initFields: { [key: string]: any } = {}) {
     this.resetForm(true);
   }
 
@@ -46,15 +43,13 @@ export class Form {
     this.fields = [
       {
         name: this.children.props.name,
-        value: this.initFields[this.children.props.name] || "",
-      },
+        value: this.initFields[this.children.props.name] || ""
+      }
     ];
 
     if (!init) {
       this.formItemObj[this.children.props.name].setErrMsg("");
-      this.formItemObj[this.children.props.name].setValue(
-        this.initFields[this.children.props.name] || ""
-      );
+      this.formItemObj[this.children.props.name].setValue(this.initFields[this.children.props.name] || "");
     }
   }
 
@@ -75,7 +70,7 @@ export class Form {
    * @return {*}
    */
   public getError(name: string) {
-    const err = this.errors.find((item) => item.name === name);
+    const err = this.errors.find(item => item.name === name);
     return err;
   }
 
@@ -93,7 +88,7 @@ export class Form {
    */
   public clearErrors() {
     this.errors = [];
-    Object.values(this.formItemObj).forEach((item) => item.setErrMsg(""));
+    Object.values(this.formItemObj).forEach(item => item.setErrMsg(""));
   }
 
   /**
@@ -102,7 +97,7 @@ export class Form {
    * @return {*}
    */
   public clearError(name: string) {
-    const idx = this.errors.findIndex((item) => item.name === name);
+    const idx = this.errors.findIndex(item => item.name === name);
 
     if (idx === -1) return;
 
@@ -116,14 +111,14 @@ export class Form {
    * @return {*}
    */
   public setError(name: string, message: string) {
-    const err = this.errors.find((item) => item.name === name);
+    const err = this.errors.find(item => item.name === name);
 
     if (err) {
       err.errMsg = message;
     } else {
       this.errors.push({
         name,
-        errMsg: message,
+        errMsg: message
       });
     }
 
@@ -137,7 +132,7 @@ export class Form {
    * @return {*}
    */
   public getField(key: string) {
-    const field = this.fields.find((item) => item.name === key);
+    const field = this.fields.find(item => item.name === key);
     return field || null;
   }
 
@@ -155,7 +150,7 @@ export class Form {
    * @return {*}
    */
   public setField(name: string, value: any) {
-    const field = this.fields.find((item) => item.name === name) || {};
+    const field = this.fields.find(item => item.name === name) || {};
     field.value = value;
     this.formItemObj[name].setValue(value);
   }
@@ -181,9 +176,7 @@ export class Form {
     return new Promise(async (resove, reject) => {
       try {
         if (Array.isArray(this.children)) {
-          const errorPromise = this.children.map((none) =>
-            this.checkError(none.props)
-          );
+          const errorPromise = this.children.map(none => this.checkError(none.props));
 
           await Promise.all(errorPromise);
           resove(this.fields);
@@ -205,14 +198,12 @@ export class Form {
   public validateField(name: string) {
     return new Promise(async (resove, reject) => {
       try {
-        const childNodes: ReactElement[] = Array.isArray(this.children)
-          ? this.children
-          : [this.children];
+        const childNodes: ReactElement[] = Array.isArray(this.children) ? this.children : [this.children];
 
-        const childNode = childNodes.find((item) => item.props.name === name);
+        const childNode = childNodes.find(item => item.props.name === name);
         await this.checkError(childNode?.props);
 
-        const field = this.fields.find((item) => item.name === name);
+        const field = this.fields.find(item => item.name === name);
         resove(field);
       } catch (e) {
         reject(e);
@@ -222,25 +213,28 @@ export class Form {
 
   private checkError(props: any) {
     return new Promise((resove, reject) => {
-      if (!props) return;
-      const { label, name, required, rules } = props || {};
-      if (!required && !rules) return;
+      if (!props) return resove(true);
 
-      const val = (this.fields.find((item) => item.name === name) || {}).value;
-      this.clearError(name);
+      const { label, name, required, rules } = props || {};
+      if (!required && !rules) return resove(true);
 
       let msg = "";
+      this.clearError(name);
+      const val = (this.fields.find(item => item.name === name) || {}).value;
 
       if (!val) {
         msg = `请输入${label}`;
       } else if (rules) {
         if (Array.isArray(rules)) {
+          // 多条
           for (let i = 0; i < rules.length; i++) {
             msg = this.typeValidate(rules[i], val);
+            if (msg) break;
           }
+        } else {
+          //单条
+          msg = this.typeValidate(rules, val);
         }
-        //单条
-        msg = this.typeValidate(rules, val);
       }
 
       if (msg) {

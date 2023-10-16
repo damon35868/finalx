@@ -1,0 +1,45 @@
+$errorColor: #eb0432;
+
+.form {
+  .form-item {
+    display: flex;
+    height: 128rpx;
+    align-items: center;
+    position: relative;
+
+    &-label {
+      padding-right: 20rpx;
+      position: relative;
+      .required-icon {
+        color: $errorColor;
+        position: absolute;
+        left: -10rpx;
+        top: -20rpx;
+        font-size: 28rpx;
+      }
+    }
+
+    &-content {
+      flex: 1;
+    }
+
+    &-error {
+      color: $errorColor;
+      position: absolute;
+      bottom: 0;
+      font-size: 24rpx;
+    }
+  }
+
+  &.form-between {
+    .form-item {
+      input,
+      picker,
+      radio,
+      radio-group {
+        font-size: 32rpx;
+        text-align: right;
+      }
+    }
+  }
+}

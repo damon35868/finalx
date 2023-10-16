@@ -7,7 +7,6 @@ export interface FormItemType {
   labelColor?: string;
   required?: boolean;
   rules?: RuleType | RuleType[];
-  layout?: "normal" | "between";
   children: ReactElement;
 }
 

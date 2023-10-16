@@ -1,20 +1,10 @@
 import React, { FC, ReactElement, cloneElement, useContext, useEffect, useState } from "react";
 import { Label, View } from "@tarojs/components";
-import "./index.scss";
 import { FormItemType } from "./types";
 import { FormContext } from "../context";
 export * from "./types";
 
-export const FormItem: FC<FormItemType> = ({
-  label,
-  labelSize = "32rpx",
-  labelColor = "#fff",
-  name,
-  children,
-  required,
-  layout = "between",
-  rules
-}) => {
+export const FormItem: FC<FormItemType> = ({ label, labelSize = "32rpx", labelColor = "#333", name, children, required, rules }) => {
   const [value, setValue] = useState("");
   const [actionName, setAction] = useState("");
   const { form, onChange } = useContext(FormContext);
@@ -56,7 +46,7 @@ export const FormItem: FC<FormItemType> = ({
   });
 
   return (
-    <View className={`form-item ${layout}`}>
+    <View className='form-item'>
       <Label style={{ fontSize: labelSize, color: labelColor }} className='form-item-label'>
         {label}
         {(required || !!rules) && <View className='required-icon'>*</View>}
