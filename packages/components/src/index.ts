@@ -10,3 +10,4 @@ export * from "./Wrapper";
 export * from "./Radar";
 export * from "./Form";
 export * from "./Form/FormItem";
+export * from "./Step";

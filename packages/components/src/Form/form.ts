@@ -7,6 +7,10 @@ interface subKeyType {
   setValue: Function;
 }
 
+interface IField {
+  [key: string]: any;
+}
+
 export class Form {
   private formItemObj: { [key: string]: subKeyType } = {};
 
@@ -131,7 +135,7 @@ export class Form {
    * @param {string} key
    * @return {*}
    */
-  public getField(key: string) {
+  public getField(key: string): IField {
     const field = this.fields.find(item => item.name === key);
     return field || null;
   }
@@ -140,7 +144,7 @@ export class Form {
    * @description: 获取全部表单
    * @return {*}
    */
-  public getFields() {
+  public getFields(): IField {
     return this.fields || [];
   }
 
@@ -172,8 +176,8 @@ export class Form {
    * @description: 校验全部字段
    * @return {*}
    */
-  public async validateFields() {
-    const fieldsObj = {};
+  public async validateFields(): Promise<IField> {
+    const fieldsObj: IField = {};
     return new Promise(async (resove, reject) => {
       try {
         if (Array.isArray(this.children)) {
@@ -198,8 +202,8 @@ export class Form {
    * @description: 校验单个字段
    * @return {*}
    */
-  public validateField(name: string) {
-    const fieldsObj = {};
+  public validateField(name: string): Promise<IField> {
+    const fieldsObj: IField = {};
     return new Promise(async (resove, reject) => {
       try {
         const childNodes: ReactElement[] = Array.isArray(this.children) ? this.children : [this.children];

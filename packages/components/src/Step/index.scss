@@ -1,0 +1,140 @@
+$normal: #3e30c8;
+$active: #8cfdd2;
+
+.step {
+  height: 116rpx;
+
+  &-content {
+    position: relative;
+  }
+  &-warpper {
+    height: 40rpx;
+    width: 100%;
+    top: 50%;
+    position: absolute;
+    display: flex;
+    z-index: 9999999;
+    box-sizing: border-box;
+    transform: translateY(-50%);
+
+    &-range-20 {
+      .step-round {
+        @for $i from 1 through 100 {
+          &-#{$i} {
+            left: calc($i * 20% - 20rpx - 70rpx);
+          }
+        }
+      }
+    }
+
+    &-range-25 {
+      .step-round {
+        @for $i from 1 through 100 {
+          &-#{$i} {
+            left: calc($i * 25% - 20rpx - 90rpx);
+          }
+        }
+      }
+    }
+
+    &-range-33 {
+      .step-round {
+        @for $i from 1 through 100 {
+          &-#{$i} {
+            left: calc($i * 33% - 20rpx - 118rpx);
+          }
+        }
+      }
+    }
+
+    &-range-50 {
+      .step-round {
+        @for $i from 1 through 100 {
+          &-#{$i} {
+            left: calc($i * 50% - 20rpx - 178rpx);
+          }
+        }
+      }
+    }
+
+    .step-round {
+      width: 40rpx;
+      height: 40rpx;
+      border-radius: 50%;
+      position: absolute;
+      box-sizing: border-box;
+      border: 8rpx solid $normal;
+      background-color: #5837e0;
+
+      &.active {
+        border-color: $active;
+      }
+
+      &-content {
+        top: 42rpx;
+        position: absolute;
+        width: 160rpx;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        left: 50%;
+        transform: translateX(-50%);
+
+        &-title {
+          color: #ffffff;
+          font-size: 28rpx;
+        }
+
+        &-desc {
+          color: #93c1ff;
+          font-size: 24rpx;
+        }
+      }
+    }
+  }
+  &-groove {
+    position: relative;
+    &-pipeline {
+      background-color: $normal;
+      height: 8rpx;
+      border-radius: 4.5rpx;
+    }
+
+    &-active {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 8rpx;
+      border-radius: 4.5rpx;
+      background-color: $active;
+      transition: width 1s ease;
+
+      .step-groove-active-pop {
+        right: 0;
+        bottom: 50rpx;
+        transform: translateX(50%);
+        position: absolute;
+
+        &-title {
+          color: $active;
+          font-size: 24rpx;
+          width: fit-content;
+          word-break: keep-all;
+          padding: 8rpx 14rpx;
+          background-color: $normal;
+          border-radius: 8rpx;
+        }
+
+        &-rect {
+          width: 20rpx;
+          height: 20rpx;
+          background-color: $normal;
+          position: absolute;
+          left: 50%;
+          bottom: -10rpx;
+          transform: translateX(-50%) rotate(45deg);
+        }
+      }
+    }
+  }
+}
