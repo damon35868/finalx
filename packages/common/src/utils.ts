@@ -140,11 +140,11 @@ export function flatArr(arr: any[], key: string = "children", deleteVal: boolean
  * @param {*} content
  * @return {*}
  */
-export const formatContent = (content: string = "") => {
+export const formatContent = (content: string = "", isBlock: boolean = true) => {
   return content
     .replace(/width=/g, "")
     .replace(/height=/g, "")
-    .replace(/<img src=/g, '<img width="100%" style="pointer-events:none;" src=')
+    .replace(/<img src=/g, `<img ${isBlock ? 'width="100%" ' : ""} style="pointer-events:none;" src=`)
     .replace(/class="ql-align-center"/g, 'style="text-align: center" class="ql-align-center"')
     .replace(/<p>/g, '<p style="margin-bottom: 1em">');
 };
