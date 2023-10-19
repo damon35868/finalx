@@ -12,7 +12,7 @@ export interface FormItemType {
 }
 
 export interface RuleType {
-  type?: "email" | "phone";
+  type?: "email" | "phone" | "idCard";
   message?: string;
   custom?: (val: any) => boolean;
 }

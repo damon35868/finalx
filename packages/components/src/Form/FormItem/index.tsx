@@ -48,7 +48,9 @@ export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, label
     value,
     ...children.props,
     [actionName]: actionFn,
-    ...(children.type === "picker" ? { children: value || `请选择${label}` } : {})
+    ...(children.type === "picker"
+      ? { children: typeof children.children === "function" ? children.children(value) : value || `请选择${label}` }
+      : {})
   });
 
   return (

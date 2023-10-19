@@ -275,6 +275,11 @@ export class Form {
         if (!phoneReg.test(val)) return message || "请输入正确的手机号码";
         return "";
       }
+      case "idCard": {
+        const idCardReg = /^(^\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
+        if (!idCardReg.test(val)) return message || "请输入正确的身份证号码";
+        return "";
+      }
     }
   }
 }

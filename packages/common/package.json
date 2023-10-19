@@ -7,8 +7,7 @@
   "types": "dist/index.d.ts",
   "keywords": [
     "finalx",
-    "common",
-    "核心"
+    "common"
   ],
   "author": "",
   "license": "MIT",
