@@ -4,7 +4,7 @@ import { FormItemType } from "./types";
 import { FormContext } from "../context";
 export * from "./types";
 
-export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, labelColor, name, children, required, rules }) => {
+export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, labelColor, errorColor, name, children, required, rules }) => {
   const [value, setValue] = useState("");
   const [actionName, setAction] = useState("");
   const {
@@ -12,7 +12,8 @@ export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, label
     onChange,
     itemHeight: formItemHeight = "128rpx",
     labelSize: formLabelSize = "32rpx",
-    labelColor: formLabelColor = "#333"
+    labelColor: formLabelColor = "#333",
+    errorColor: formErrorColor = "#eb0432"
   } = useContext(FormContext);
   const [errMsg, setErrMsg] = useState<string>("");
 
@@ -49,7 +50,7 @@ export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, label
     ...children.props,
     [actionName]: actionFn,
     ...(children.type === "picker"
-      ? { children: typeof children.children === "function" ? children.children(value) : value || `请选择${label}` }
+      ? { children: typeof children.props.children === "function" ? children.props.children(value) : value || `请选择${label}` }
       : {})
   });
 
@@ -57,11 +58,17 @@ export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, label
     <View className='form-item' style={{ height: itemHeight || formItemHeight }}>
       <Label style={{ fontSize: labelSize || formLabelSize, color: labelColor || formLabelColor }} className='form-item-label'>
         {label}
-        {(required || !!rules) && <View className='required-icon'>*</View>}
+        {(required || !!rules) && (
+          <View className='required-icon' style={{ color: errorColor || formErrorColor }}>
+            *
+          </View>
+        )}
       </Label>
       <View className='form-item-content'>{itemEl}</View>
 
-      <View className='form-item-error'>{errMsg}</View>
+      <View className='form-item-error' style={{ color: errorColor || formErrorColor }}>
+        {errMsg}
+      </View>
     </View>
   );
 };

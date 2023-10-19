@@ -7,4 +7,5 @@ export const FormContext = createContext<{
   itemHeight?: string;
   labelSize?: string;
   labelColor?: string;
+  errorColor?: string;
 }>({} as any);
