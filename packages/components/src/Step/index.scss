@@ -21,7 +21,7 @@ $active: #8cfdd2;
       .step-round {
         @for $i from 1 through 100 {
           &-#{$i} {
-            left: calc($i * 20% - 20rpx - 70rpx);
+            left: calc($i * 20% - 20rpx - 60rpx);
           }
         }
       }
@@ -31,7 +31,7 @@ $active: #8cfdd2;
       .step-round {
         @for $i from 1 through 100 {
           &-#{$i} {
-            left: calc($i * 25% - 20rpx - 90rpx);
+            left: calc($i * 25% - 20rpx - 78rpx);
           }
         }
       }
@@ -41,7 +41,7 @@ $active: #8cfdd2;
       .step-round {
         @for $i from 1 through 100 {
           &-#{$i} {
-            left: calc($i * 33% - 20rpx - 118rpx);
+            left: calc($i * 33% - 20rpx - 97rpx);
           }
         }
       }
@@ -51,7 +51,7 @@ $active: #8cfdd2;
       .step-round {
         @for $i from 1 through 100 {
           &-#{$i} {
-            left: calc($i * 50% - 20rpx - 178rpx);
+            left: calc($i * 50% - 20rpx - 152rpx);
           }
         }
       }

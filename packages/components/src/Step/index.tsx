@@ -3,10 +3,10 @@ import { View } from "@tarojs/components";
 import "./index.scss";
 
 const map = new Map([
-  [20, "57"],
-  [25, "70"],
-  [33, "105"],
-  [50, "160"]
+  [20, "45"],
+  [25, "60"],
+  [33, "88"],
+  [50, "133"]
 ]);
 
 interface IStepProps {
