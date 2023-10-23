@@ -10,6 +10,10 @@ export enum roleAuthPermissionsType {
  * @return {*}
  */
 class RoleAuth extends BaseAuth {
+  constructor() {
+    super(roleAuthPermissionsType.ADMIN);
+  }
+
   check(cb?: Function, errcb?: Function, lv?: roleAuthPermissionsType): boolean {
     const level = lv || this.level;
 

@@ -8,6 +8,7 @@ export interface FormItemType {
   labelColor?: string;
   errorColor?: string;
   required?: boolean;
+  disabled?: boolean;
   rules?: RuleType | RuleType[];
   children: ReactElement;
 }

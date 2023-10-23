@@ -4,12 +4,13 @@ import { FormItemType } from "./types";
 import { FormContext } from "../context";
 export * from "./types";
 
-export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, labelColor, errorColor, name, children, required, rules }) => {
+export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, labelColor, errorColor, name, children, required, disabled, rules }) => {
   const [value, setValue] = useState("");
   const [actionName, setAction] = useState("");
   const {
     form,
     onChange,
+    disabled: formDisabled,
     itemHeight: formItemHeight = "128rpx",
     labelSize: formLabelSize = "32rpx",
     labelColor: formLabelColor = "#333",
@@ -47,6 +48,7 @@ export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, label
 
   const itemEl = cloneElement(children as ReactElement, {
     value,
+    disabled: typeof disabled === "boolean" ? disabled : formDisabled,
     ...children.props,
     [actionName]: actionFn,
     ...(children.type === "picker"

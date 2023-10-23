@@ -13,9 +13,10 @@ export const Form: FC<{
   labelSize?: string;
   labelColor?: string;
   errorColor?: string;
+  disabled?: boolean;
   layout?: "normal" | "between";
   onChange?: (val: any) => any;
-}> = ({ layout = "between", formRef, children, initFields, itemHeight, labelSize, labelColor, errorColor, onChange }) => {
+}> = ({ layout = "between", formRef, children, initFields, itemHeight, labelSize, labelColor, disabled, errorColor, onChange }) => {
   const [form, setForm] = useState<FormObj>();
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export const Form: FC<{
   if (!form) return null;
 
   return (
-    <FormContext.Provider value={{ onChange, form, itemHeight, labelSize, labelColor, errorColor }}>
+    <FormContext.Provider value={{ onChange, form, itemHeight, labelSize, labelColor, errorColor, disabled }}>
       <View className={`form form-${layout}`}>{children}</View>
     </FormContext.Provider>
   );

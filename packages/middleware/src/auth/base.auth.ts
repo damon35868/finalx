@@ -1,14 +1,12 @@
 /**
- * @description: auth基类，用于被其他类实现
+ * @description: Auth基类，用于被其他类实现
  * @return {*}
  */
 export abstract class BaseAuth {
-  protected level: any;
+  // protected level: any;
   protected lastCb: Function | undefined;
 
-  constructor(level?: any) {
-    this.level = level;
-  }
+  constructor(protected level?: any) {}
 
   protected setLastCb(cb: Function) {
     this.lastCb = () => {

@@ -8,4 +8,5 @@ export const FormContext = createContext<{
   labelSize?: string;
   labelColor?: string;
   errorColor?: string;
+  disabled?: boolean;
 }>({} as any);
