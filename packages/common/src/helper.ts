@@ -6,6 +6,10 @@ import { toast } from "./utils";
  * @return {*}
  */
 class Helper {
+  // 重试次数
+  private timeoutCount: number = 0;
+  // 重试最大次数
+  private maxCount: number = 100;
   /**
    * @description: 统一请求执行，包含错误处理
    * @return {*}
@@ -61,6 +65,44 @@ class Helper {
         onError && onError(e);
         showToast && toast(errorText || e.message);
       }
+    });
+  }
+
+  /**
+   * @description: 接口或者运行重试方法
+   * @param {function} callback
+   * @param {number} maxCount
+   * @return {*}
+   */
+  retry({
+    rule,
+    callback,
+    maxCount = this.maxCount
+  }: {
+    maxCount: number;
+    callback: (val?: any) => Promise<any>;
+    rule?: (val?: any) => boolean;
+  }): Promise<any> {
+    this.timeoutCount = 0;
+    return new Promise(async (resove, reject) => {
+      do {
+        try {
+          const res = await this.run({
+            showToast: false,
+            apiFn: () => callback()
+          });
+
+          const data = rule ? rule(res) : true;
+          if (!data) throw new Error("返回值不符合要求");
+
+          this.timeoutCount = maxCount;
+          resove({ msg: "重试成功", data });
+        } catch (e) {
+          this.timeoutCount++;
+          console.log(`[--重试第${this.timeoutCount}次--]`);
+          if (this.timeoutCount >= maxCount) reject(new Error("重试次数达到上限"));
+        }
+      } while (this.timeoutCount <= maxCount);
     });
   }
 }
