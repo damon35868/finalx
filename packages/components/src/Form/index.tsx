@@ -19,7 +19,11 @@ export const Form: FC<{
 }> = ({ layout = "between", formRef, children: childrenVal, initFields, itemHeight, labelSize, labelColor, disabled, errorColor, onChange }) => {
   const [form, setForm] = useState<FormObj>();
 
-  const children = Array.isArray(childrenVal) ? childrenVal.filter(item => isValidElement(item)) : isValidElement(childrenVal) ? childrenVal : <></>;
+  const children: ReactElement | ReactElement[] = Array.isArray(childrenVal)
+    ? childrenVal.filter(item => isValidElement(item))
+    : isValidElement(childrenVal)
+    ? childrenVal
+    : ((<></>) as any);
 
   useEffect(() => {
     if (form) return;

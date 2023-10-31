@@ -65,6 +65,7 @@ export class Form {
     this.formItemObj[name] = formItemObj;
 
     const field = this.getField(name);
+    if (!field) return;
     if (field.value) formItemObj.setValue(field.value);
   }
 
