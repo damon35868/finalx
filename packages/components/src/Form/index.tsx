@@ -26,9 +26,9 @@ export const Form: FC<{
     : ((<></>) as any);
 
   useEffect(() => {
-    if (form) return;
+    if (form) return form.initData({ children, initFields });
     setForm(new FormObj(children, initFields));
-  }, []);
+  }, [children]);
 
   useImperativeHandle(formRef, () => form as FormObj, [form]);
 

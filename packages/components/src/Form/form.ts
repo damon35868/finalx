@@ -58,6 +58,15 @@ export class Form {
   }
 
   /**
+   * @description: 初始化基础数据
+   * @return {*}
+   */
+  public initData({ children, initFields }: { children?: ReactElement | ReactElement[]; initFields?: { [key: string]: any } }) {
+    children && (this.children = children);
+    initFields && (this.initFields = initFields);
+  }
+
+  /**
    * @description: 初始化form item操作state
    * @return {*}
    */
