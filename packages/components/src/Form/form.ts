@@ -64,6 +64,9 @@ export class Form {
   public initData({ children, initFields }: { children?: ReactElement | ReactElement[]; initFields?: { [key: string]: any } }) {
     children && (this.children = children);
     initFields && (this.initFields = initFields);
+
+    if (!children && !initFields) return;
+    this.resetForm(true);
   }
 
   /**
