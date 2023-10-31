@@ -79,7 +79,7 @@ class Helper {
     callback,
     maxCount = this.maxCount
   }: {
-    maxCount: number;
+    maxCount?: number;
     callback: (val?: any) => Promise<any>;
     rule?: (val?: any) => boolean;
   }): Promise<any> {
@@ -87,15 +87,15 @@ class Helper {
     return new Promise(async (resove, reject) => {
       do {
         try {
-          const res = await this.run({
+          const data = await this.run({
             showToast: false,
             apiFn: () => callback()
           });
 
-          const data = rule ? rule(res) : true;
-          if (!data) throw new Error("返回值不符合要求");
+          const status = rule ? rule(data) : true;
+          if (!status) throw new Error("返回值不符合要求");
 
-          this.timeoutCount = maxCount;
+          this.timeoutCount = maxCount + 1;
           resove({ msg: "重试成功", data });
         } catch (e) {
           this.timeoutCount++;
