@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, Ref, useEffect, useImperativeHandle, useState } from "react";
+import React, { FC, ReactElement, Ref, useEffect, useImperativeHandle, useState, isValidElement } from "react";
 import { Form as FormObj } from "./form";
 import { FormContext } from "./context";
 import { View } from "@tarojs/components";
@@ -7,7 +7,7 @@ export { Form as FormType } from "./form";
 
 export const Form: FC<{
   formRef?: Ref<FormObj>;
-  children: ReactElement | ReactElement[];
+  children: ReactElement | ReactElement[] | boolean | (boolean | ReactElement)[];
   initFields?: { [key: string]: any };
   itemHeight?: string;
   labelSize?: string;
@@ -16,8 +16,10 @@ export const Form: FC<{
   disabled?: boolean;
   layout?: "normal" | "between";
   onChange?: (val: any) => any;
-}> = ({ layout = "between", formRef, children, initFields, itemHeight, labelSize, labelColor, disabled, errorColor, onChange }) => {
+}> = ({ layout = "between", formRef, children: childrenVal, initFields, itemHeight, labelSize, labelColor, disabled, errorColor, onChange }) => {
   const [form, setForm] = useState<FormObj>();
+
+  const children = Array.isArray(childrenVal) ? childrenVal.filter(item => isValidElement(item)) : isValidElement(childrenVal) ? childrenVal : <></>;
 
   useEffect(() => {
     if (form) return;

@@ -10,6 +10,7 @@ class Helper {
   private timeoutCount: number = 0;
   // 重试最大次数
   private maxCount: number = 100;
+
   /**
    * @description: 统一请求执行，包含错误处理
    * @return {*}
@@ -69,9 +70,7 @@ class Helper {
   }
 
   /**
-   * @description: 接口或者运行重试方法
-   * @param {function} callback
-   * @param {number} maxCount
+   * @description: 接口重试方法
    * @return {*}
    */
   retry({

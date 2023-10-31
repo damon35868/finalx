@@ -176,8 +176,8 @@ export class Form {
    * @description: 校验全部字段
    * @return {*}
    */
-  public async validateFields(): Promise<IField> {
-    const fieldsObj: IField = {};
+  public async validateFields<T>(): Promise<T> {
+    const fieldsObj: T = {} as T;
     return new Promise(async (resove, reject) => {
       try {
         if (Array.isArray(this.children)) {
@@ -202,8 +202,8 @@ export class Form {
    * @description: 校验单个字段
    * @return {*}
    */
-  public validateField(name: string): Promise<IField> {
-    const fieldsObj: IField = {};
+  public validateField<T>(name: string): Promise<T> {
+    const fieldsObj: T = {} as T;
     return new Promise(async (resove, reject) => {
       try {
         const childNodes: ReactElement[] = Array.isArray(this.children) ? this.children : [this.children];
