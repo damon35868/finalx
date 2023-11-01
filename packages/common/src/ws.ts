@@ -38,7 +38,7 @@ export interface WsHandler {
 }
 
 class WS implements Ws {
-  public client: SocketTask = {} as SocketTask;
+  public client: SocketTask;
   public inited: boolean | undefined;
   private subscribeEvents: { [key: string]: SubscribeEvent } = {};
   private wsurl: string | undefined;
@@ -56,6 +56,13 @@ class WS implements Ws {
   }
 
   constructor() {
+    this.init();
+  }
+
+  init() {
+    if (this.client) return;
+
+    this.initTimer && clearInterval(this.initTimer);
     this.initTimer = setInterval(() => {
       if (getItem("token")) {
         if (config.request.wsUrl) {
@@ -73,6 +80,7 @@ class WS implements Ws {
       }
     }, 10);
   }
+
   setOptions(options: WsConnectOptions) {
     this.options = options;
   }

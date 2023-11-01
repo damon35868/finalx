@@ -1,6 +1,7 @@
 import { log as logHandler } from "../log";
 import { configTypes, middlewareConfigType, requestConfigType } from "./types";
 import { config } from "./instance";
+import { wsClient } from "../ws";
 export { config } from "./instance";
 
 function requestConfig(reqConfig: requestConfigType | undefined) {
@@ -8,6 +9,7 @@ function requestConfig(reqConfig: requestConfigType | undefined) {
 
   Object.assign(config, { request: reqConfig });
   config.log && logHandler.success("[配置请求成功]");
+  if (reqConfig.wsUrl) wsClient.init();
 }
 
 function middlewareConfig(middleware: middlewareConfigType | undefined) {
