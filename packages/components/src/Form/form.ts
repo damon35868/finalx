@@ -28,12 +28,15 @@ export class Form {
    */
   public resetForm(init?: boolean) {
     this.errors = [];
-    this.fields = [];
+    // this.fields = [];
 
     if (Array.isArray(this.children)) {
       this.children.forEach((element, key) => {
         const name = element.props.name;
-        const value = this.initFields[name] || "";
+
+        const { value: fieldValue } = this.getField(name) || {};
+        const value = fieldValue || this.initFields[name] || "";
+
         this.fields[key] = { name, value };
 
         if (!init) {
@@ -44,16 +47,17 @@ export class Form {
       return;
     }
 
+    const { value: fieldValue } = this.getField(this.children.props.name) || {};
     this.fields = [
       {
         name: this.children.props.name,
-        value: this.initFields[this.children.props.name] || ""
+        value: fieldValue || this.initFields[this.children.props.name] || ""
       }
     ];
 
     if (!init) {
       this.formItemObj[this.children.props.name].setErrMsg("");
-      this.formItemObj[this.children.props.name].setValue(this.initFields[this.children.props.name] || "");
+      this.formItemObj[this.children.props.name].setValue(fieldValue || this.initFields[this.children.props.name] || "");
     }
   }
 
