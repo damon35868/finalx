@@ -19,30 +19,23 @@ export class Form {
   private errors: any[] = [];
 
   constructor(private children: ReactElement | ReactElement[], private initFields: { [key: string]: any } = {}) {
-    this.resetForm(true);
+    this.initForm();
   }
 
   /**
    * @description:重置表单
    * @return {*}
    */
-  public resetForm(init?: boolean) {
+  private initForm() {
     this.errors = [];
-    // this.fields = [];
 
     if (Array.isArray(this.children)) {
-      this.children.forEach((element, key) => {
-        const name = element.props.name;
+      this.children.forEach((item, key) => {
+        const name = item.props.name;
 
         const { value: fieldValue } = this.getField(name) || {};
         const value = fieldValue || this.initFields[name] || "";
-
         this.fields[key] = { name, value };
-
-        if (!init) {
-          this.formItemObj[name].setErrMsg("");
-          this.formItemObj[name].setValue(value);
-        }
       });
       return;
     }
@@ -54,11 +47,27 @@ export class Form {
         value: fieldValue || this.initFields[this.children.props.name] || ""
       }
     ];
+  }
 
-    if (!init) {
-      this.formItemObj[this.children.props.name].setErrMsg("");
-      this.formItemObj[this.children.props.name].setValue(fieldValue || this.initFields[this.children.props.name] || "");
+  public resetForm() {
+    this.errors = [];
+    this.fields = [];
+
+    if (Array.isArray(this.children)) {
+      this.children.forEach((item, key) => {
+        const name = item.props.name;
+
+        const value = this.initFields[name] || "";
+        this.fields[key] = { name, value };
+
+        this.formItemObj[name].setErrMsg("");
+        this.formItemObj[name].setValue(value);
+      });
+      return;
     }
+
+    this.formItemObj[this.children.props.name].setErrMsg("");
+    this.formItemObj[this.children.props.name].setValue(this.initFields[this.children.props.name] || "");
   }
 
   /**
@@ -70,7 +79,7 @@ export class Form {
     initFields && (this.initFields = initFields);
 
     if (!children && !initFields) return;
-    this.resetForm(true);
+    this.initForm();
   }
 
   /**
