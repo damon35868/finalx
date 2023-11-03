@@ -13,3 +13,8 @@ export enum RequestMethod {
   post = 'POST',
   get = 'GET',
 }
+
+
+export enum WSEvent {
+  User = 'User', // 用户
+}
