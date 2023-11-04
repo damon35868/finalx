@@ -27,7 +27,7 @@ export class Form {
    * @return {*}
    */
   private initForm() {
-    this.errors = [];
+    this.clearErrors();
 
     if (Array.isArray(this.children)) {
       this.children.forEach((item, key) => {
@@ -50,8 +50,8 @@ export class Form {
   }
 
   public resetForm() {
-    this.errors = [];
     this.fields = [];
+    this.clearErrors();
 
     if (Array.isArray(this.children)) {
       this.children.forEach((item, key) => {
@@ -118,7 +118,10 @@ export class Form {
    */
   public clearErrors() {
     this.errors = [];
-    Object.values(this.formItemObj).forEach(item => item.setErrMsg(""));
+    Object.values(this.formItemObj).forEach(item => {
+      item.errMsg = "";
+      item.setErrMsg("");
+    });
   }
 
   /**
@@ -190,10 +193,8 @@ export class Form {
    * @return {*}
    */
   public setFields(val: { [key: string]: any }) {
-    this.fields = [];
-
     for (const [name, value] of Object.entries(val)) {
-      this.fields.push({ name, value });
+      this.setField(name, value);
       this.formItemObj[name].setValue(value);
     }
   }
