@@ -9,4 +9,5 @@ export const FormContext = createContext<{
   labelColor?: string;
   errorColor?: string;
   disabled?: boolean;
+  errorAligin?: "left" | "right";
 }>({} as any);

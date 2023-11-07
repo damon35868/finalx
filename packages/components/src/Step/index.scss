@@ -17,46 +17,6 @@ $active: #8cfdd2;
     box-sizing: border-box;
     transform: translateY(-50%);
 
-    &-range-20 {
-      .step-round {
-        @for $i from 1 through 100 {
-          &-#{$i} {
-            left: calc($i * 20% - 20rpx - 60rpx);
-          }
-        }
-      }
-    }
-
-    &-range-25 {
-      .step-round {
-        @for $i from 1 through 100 {
-          &-#{$i} {
-            left: calc($i * 25% - 20rpx - 78rpx);
-          }
-        }
-      }
-    }
-
-    &-range-33 {
-      .step-round {
-        @for $i from 1 through 100 {
-          &-#{$i} {
-            left: calc($i * 33% - 20rpx - 97rpx);
-          }
-        }
-      }
-    }
-
-    &-range-50 {
-      .step-round {
-        @for $i from 1 through 100 {
-          &-#{$i} {
-            left: calc($i * 50% - 20rpx - 152rpx);
-          }
-        }
-      }
-    }
-
     .step-round {
       width: 40rpx;
       height: 40rpx;

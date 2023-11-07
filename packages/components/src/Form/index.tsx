@@ -16,7 +16,20 @@ export const Form: FC<{
   disabled?: boolean;
   layout?: "normal" | "between";
   onChange?: (val: any) => any;
-}> = ({ layout = "between", formRef, children: childrenVal, initFields, itemHeight, labelSize, labelColor, disabled, errorColor, onChange }) => {
+  errorAligin?: "left" | "right";
+}> = ({
+  layout = "between",
+  formRef,
+  children: childrenVal,
+  initFields,
+  itemHeight,
+  labelSize,
+  labelColor,
+  disabled,
+  errorColor,
+  onChange,
+  errorAligin
+}) => {
   const [form, setForm] = useState<FormObj>();
 
   const children: ReactElement | ReactElement[] = Array.isArray(childrenVal)
@@ -35,7 +48,7 @@ export const Form: FC<{
   if (!form) return null;
 
   return (
-    <FormContext.Provider value={{ onChange, form, itemHeight, labelSize, labelColor, errorColor, disabled }}>
+    <FormContext.Provider value={{ onChange, form, itemHeight, labelSize, labelColor, errorColor, disabled, errorAligin }}>
       <View className={`form form-${layout}`}>{children}</View>
     </FormContext.Provider>
   );

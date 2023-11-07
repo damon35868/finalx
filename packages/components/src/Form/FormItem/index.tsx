@@ -4,7 +4,19 @@ import { FormItemType } from "./types";
 import { FormContext } from "../context";
 export * from "./types";
 
-export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, labelColor, errorColor, name, children, required, disabled, rules }) => {
+export const FormItem: FC<FormItemType> = ({
+  label,
+  itemHeight,
+  labelSize,
+  labelColor,
+  errorColor,
+  name,
+  children,
+  required,
+  disabled,
+  rules,
+  errorAligin
+}) => {
   const [value, setValue] = useState("");
   const [actionName, setAction] = useState("");
   const {
@@ -14,7 +26,8 @@ export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, label
     itemHeight: formItemHeight = "128rpx",
     labelSize: formLabelSize = "32rpx",
     labelColor: formLabelColor = "#333",
-    errorColor: formErrorColor = "#eb0432"
+    errorColor: formErrorColor = "#eb0432",
+    errorAligin: formErrorAligin = "right"
   } = useContext(FormContext);
   const [errMsg, setErrMsg] = useState<string>("");
 
@@ -68,7 +81,13 @@ export const FormItem: FC<FormItemType> = ({ label, itemHeight, labelSize, label
       </Label>
       <View className='form-item-content'>{itemEl}</View>
 
-      <View className='form-item-error' style={{ color: errorColor || formErrorColor }}>
+      <View
+        className='form-item-error'
+        style={{
+          color: errorColor || formErrorColor,
+          ...((errorAligin || formErrorAligin) === "right" ? { right: 0 } : { left: 0 })
+        }}
+      >
         {errMsg}
       </View>
     </View>

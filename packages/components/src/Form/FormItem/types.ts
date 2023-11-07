@@ -11,6 +11,7 @@ export interface FormItemType {
   disabled?: boolean;
   rules?: RuleType | RuleType[];
   children: ReactElement;
+  errorAligin?: "left" | "right";
 }
 
 export interface RuleType {
