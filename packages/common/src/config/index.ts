@@ -3,6 +3,7 @@ import { configTypes, middlewareConfigType, requestConfigType } from "./types";
 import { config } from "./instance";
 import { wsClient } from "../ws";
 export { config } from "./instance";
+export * from "./types";
 
 function requestConfig(reqConfig: requestConfigType | undefined) {
   if (typeof reqConfig !== "object") return;

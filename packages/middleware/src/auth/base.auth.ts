@@ -1,12 +1,11 @@
+import { TFilterKey } from "@finalx/common";
+
 /**
  * @description: Auth基类，用于被其他类实现
  * @return {*}
  */
 export abstract class BaseAuth {
-  // protected level: any;
   protected lastCb: Function | undefined;
-
-  constructor(protected level?: any) {}
 
   protected setLastCb(cb: Function) {
     this.lastCb = () => {
@@ -20,11 +19,11 @@ export abstract class BaseAuth {
    * @description: 监测用户是否具有相关权限
    * @return {*}
    */
-  abstract check(cb?: Function, errcb?: Function, lv?: any): boolean;
+  abstract check(cb?: Function, errcb?: Function, filterKey?: TFilterKey): boolean;
 
   /**
    * @description: 获取权限
    * @return {*}
    */
-  abstract getPermission(lv?: any): boolean;
+  abstract getPermission(filterKey: TFilterKey, config?: any): boolean;
 }

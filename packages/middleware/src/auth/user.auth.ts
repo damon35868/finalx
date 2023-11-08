@@ -1,47 +1,31 @@
-import { getItem, setUserAuth, config, isEmpty } from "@finalx/common";
+import { getItem, setUserAuth, config, TFilterKey, getMiddlewareData } from "@finalx/common";
 import { LocalStorageKeys } from "../enums";
 import { BaseAuth } from "./base.auth";
 
-export enum userAuthPermissionsType {
-  ALL = 0,
-  USER = 1,
-  PHONE = 2
-}
-
 class UserAuth extends BaseAuth {
-  constructor() {
-    super(userAuthPermissionsType.ALL);
-  }
-
   private get userInfo() {
     return getItem(LocalStorageKeys.userInfo);
   }
 
   private get filterKey() {
-    const newFilterKey = !isEmpty(config.middleware?.userAuth.filterKey)
-      ? config.middleware?.userAuth.filterKey
-      : {
-          phone: "mobilePhone",
-          info: "name"
-        };
+    return config.middleware?.userAuth.filterKey || ["name", "mobilePhone"];
+  }
 
-    return Object.assign(
-      {
-        phone: "mobilePhone",
-        info: "name"
-      },
-      newFilterKey
-    );
+  private get filterData() {
+    const dataSource = config.middleware?.userAuth.data || this.userInfo;
+    if (typeof dataSource === "string") return getMiddlewareData(dataSource) || getItem(dataSource) || {};
+
+    return dataSource;
   }
 
   /**
    * @description: 查看授权
    * @return {*}
    */
-  public check(cb?: Function, errcb?: Function, lv?: userAuthPermissionsType): boolean {
+  public check(cb?: Function, errcb?: Function, filterKey?: TFilterKey): boolean {
     cb && this.setLastCb(cb);
-    const level = lv || this.level;
-    const hasAuth = this.getPermission(level);
+    const key = filterKey || this.filterKey;
+    const hasAuth = this.getPermission(key);
 
     setUserAuth(!hasAuth);
 
@@ -59,33 +43,21 @@ class UserAuth extends BaseAuth {
     return false;
   }
 
-  public getPermission(lv?: userAuthPermissionsType) {
-    const level = lv || this.level;
+  public getPermission(filterKey: TFilterKey, config?: any): boolean {
+    if (!filterKey) throw new Error("传入了非法权限筛选键");
+    const dataSource = config || this.filterData;
 
-    switch (level) {
-      case userAuthPermissionsType.ALL: {
-        return this.getInfoPermission() && this.getPhonePermission();
-      }
-      case userAuthPermissionsType.USER: {
-        return this.getInfoPermission();
-      }
-      case userAuthPermissionsType.PHONE: {
-        return this.getPhonePermission();
-      }
+    if (Array.isArray(filterKey)) {
+      const filters = filterKey.map(item => {
+        if (typeof item === "string") return !!dataSource[item];
+        if (item.rule) return item.rule(dataSource, item.key);
+        return !!dataSource[item.key];
+      });
 
-      default:
-        return false;
+      return filters.every(authStatus => authStatus);
     }
-  }
 
-  private getInfoPermission() {
-    const info = this.userInfo[this.filterKey.info];
-    return !!info;
-  }
-
-  private getPhonePermission(): boolean {
-    const mobilePhone = this.userInfo[this.filterKey.phone];
-    return !!mobilePhone;
+    return !!dataSource[filterKey];
   }
 }
 

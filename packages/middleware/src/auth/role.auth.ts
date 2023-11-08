@@ -1,29 +1,16 @@
 import { BaseAuth } from "./base.auth";
-
-export enum roleAuthPermissionsType {
-  ADMIN = 0,
-  USER = 1
-}
+import { TFilterKey } from "@finalx/common";
 
 /**
  * @description: 角色权限
  * @return {*}
  */
 class RoleAuth extends BaseAuth {
-  constructor() {
-    super(roleAuthPermissionsType.ADMIN);
-  }
-
-  check(cb?: Function, errcb?: Function, lv?: roleAuthPermissionsType): boolean {
-    const level = lv || this.level;
-
-    switch (level) {
-    }
-
+  check(cb?: Function, errcb?: Function, filterKey?: TFilterKey): boolean {
     return false;
   }
 
-  getPermission(lv?: any): boolean {
+  getPermission(filterKey: TFilterKey, config?: any): boolean {
     return false;
   }
 }

@@ -194,11 +194,13 @@ export function useUserAuthModal() {
 export function useUserState() {
   const token = initStore((state: any) => state.token);
   const userInfo = initStore((state: any) => state.userInfo);
+  const middlewareData = initStore((state: any) => state.middlewareData);
   const setUserState = initStore((state: any) => state.setter);
 
   return {
     token,
     userInfo,
+    middlewareData,
     setUserState: (val: { token?: string; userInfo?: any }) =>
       unstable_batchedUpdates(() => {
         setUserState(val);

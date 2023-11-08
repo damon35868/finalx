@@ -44,7 +44,7 @@ export function getScaleImageURL(urls: string, w: number, h: number) {
 
 /**
  * @description: 判断是否是今天
- * @param {number} timer 时间戳
+ * @param {number} timer 时间戳或日期字符串
  * @return {boolean}
  */
 export function isToday(timer: number | string): boolean {

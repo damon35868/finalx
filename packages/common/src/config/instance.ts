@@ -2,7 +2,10 @@ import { configTypes, middlewareConfigType, requestConfigType } from "./types";
 
 class Config implements configTypes {
   public log: boolean = false;
-  public middleware: middlewareConfigType = { userAuth: {} };
+  public middleware: middlewareConfigType = {
+    userAuth: {},
+    roleAuth: {}
+  };
   public request: requestConfigType = {
     wsUrl: "",
     baseUrl: "",

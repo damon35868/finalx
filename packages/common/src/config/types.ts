@@ -13,11 +13,16 @@ export interface requestConfigType {
   bearerToken?: boolean;
 }
 
+export type TFilterKey = string | ({ key: string; rule?: (val: any, key: string) => boolean } | string)[];
+
 export interface middlewareConfigType {
   userAuth?: {
-    filterKey?: {
-      phone?: string;
-      info?: string;
-    };
+    data?: Object | string;
+    filterKey?: TFilterKey;
+  };
+
+  roleAuth?: {
+    data?: Object | string;
+    filterKey?: TFilterKey;
   };
 }

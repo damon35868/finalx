@@ -1,6 +1,7 @@
 export enum LocalStorageKeys {
   token = "token",
-  userInfo = "userInfo"
+  userInfo = "userInfo",
+  middlewareData = "middlewareData"
 }
 
 export enum ErrorCode {

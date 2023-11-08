@@ -7,27 +7,38 @@ import { create } from "zustand";
 interface initStateType {
   token: string | null;
   userInfo: any | null;
+  middlewareData: any | null;
   setter: (val: { token?: string; userInfo?: any }) => any;
 }
 
 export const initStore = create<initStateType>(set => ({
   token: null,
   userInfo: null,
-
-  setter: ({ token, userInfo }: { token?: string; userInfo?: any }) => {
-    if (token) {
+  middlewareData: null,
+  setter: ({ token, userInfo, middlewareData }: { token?: string; userInfo?: any; middlewareData?: any }) => {
+    if (token !== undefined) {
       set({ token });
       setItem(LocalStorageKeys.token, token);
     }
 
-    if (userInfo) {
+    if (userInfo !== undefined) {
       set({ userInfo });
       setItem(LocalStorageKeys.userInfo, userInfo);
+    }
+
+    if (middlewareData !== undefined) {
+      set({ middlewareData });
+      setItem(LocalStorageKeys.middlewareData, middlewareData);
     }
 
     token && userInfo && config.log && log.success("[初始化State成功]");
   }
 }));
+
+export function getMiddlewareData(key: string) {
+  const { middlewareData } = initStore.getState() || {};
+  return (middlewareData || {})[key];
+}
 
 export const authStore = create(set => ({
   state: false,
