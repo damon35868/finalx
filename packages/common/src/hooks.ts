@@ -201,7 +201,7 @@ export function useUserState() {
     token,
     userInfo,
     middlewareData,
-    setUserState: (val: { token?: string; userInfo?: any }) =>
+    setUserState: (val: { token?: string; userInfo?: any; middlewareData?: any }) =>
       unstable_batchedUpdates(() => {
         setUserState(val);
       })
