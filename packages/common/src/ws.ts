@@ -88,7 +88,7 @@ class WS implements Ws {
   async connect(): Promise<void> {
     console.log("[WS连接中]");
 
-    if (this.client && typeof this.client.readyState === "number" && ![2, 3].includes(this.client.readyState)) {
+    if (this.client && this.client.readyState === 1) {
       closeSocket();
     }
 
