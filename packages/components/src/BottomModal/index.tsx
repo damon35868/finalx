@@ -1,4 +1,4 @@
-import React, { ReactNode, FC, CSSProperties } from "react";
+import React, { ReactNode, FC, CSSProperties, useEffect } from "react";
 import classNames from "classnames";
 import { View } from "@tarojs/components";
 import "./index.scss";
@@ -20,7 +20,7 @@ export const BottomModal: FC<BottomModalProps> = ({ status, setStatus, closeOnCl
   };
 
   return (
-    <View style={style} className={classNames("sd_bottom-modal", { show: status })} onClick={() => closeOnClickModal && close()}>
+    <View catchMove style={style} className={classNames("sd_bottom-modal", { show: status })} onClick={() => closeOnClickModal && close()}>
       <View className={classNames("bg sd_bottom-modal-content", { active: status, rounded })} onClick={e => e.stopPropagation()}>
         <View className='sd_bottom-modal-content-main'>{children}</View>
       </View>

@@ -71,8 +71,8 @@ $active: #8cfdd2;
 
       .step-groove-active-pop {
         right: 0;
-        bottom: 50rpx;
         transform: translateX(50%);
+        bottom: 50rpx;
         position: absolute;
 
         &-title {
@@ -90,9 +90,33 @@ $active: #8cfdd2;
           height: 20rpx;
           background-color: $normal;
           position: absolute;
-          left: 50%;
           bottom: -10rpx;
+          left: 50%;
           transform: translateX(-50%) rotate(45deg);
+        }
+      }
+
+      .step-groove-active-pop-left {
+        transform: translateX(calc(100% - 16rpx));
+        .step-groove-active-pop-title {
+          border-bottom-left-radius: 0;
+        }
+        .step-groove-active-pop-rect {
+          right: auto;
+          left: 6rpx;
+          transform: rotate(45deg);
+        }
+      }
+
+      .step-groove-active-pop-right {
+        transform: translateX(15rpx);
+        .step-groove-active-pop-title {
+          border-bottom-right-radius: 0;
+        }
+        .step-groove-active-pop-rect {
+          left: auto;
+          right: 6rpx;
+          transform: rotate(45deg);
         }
       }
     }

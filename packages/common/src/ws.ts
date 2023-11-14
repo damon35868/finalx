@@ -1,5 +1,5 @@
 import mitt from "mitt";
-import { SocketTask, connectSocket } from "@tarojs/taro";
+import { SocketTask, connectSocket, closeSocket } from "@tarojs/taro";
 import { getItem } from "./utils";
 import { config } from "./config";
 
@@ -87,6 +87,10 @@ class WS implements Ws {
 
   async connect(): Promise<void> {
     console.log("[WS连接中]");
+
+    closeSocket();
+    this.client = null;
+
     this.client = await connectSocket({
       url: this.wsurl,
       // header: {
