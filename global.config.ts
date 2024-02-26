@@ -16,10 +16,8 @@ import { globalConfig } from '@finalx/common'
     },
     middleware: {
       userAuth: {
-        filterKey: {
-          info: 'nickName',
-          phone: 'mobilePhone',
-        },
+        // filterKey: [{ key: "nickName", rule: (val, key) => true }],
+        filterKey: ['nickName','mobilePhone'],
       },
     },
   })

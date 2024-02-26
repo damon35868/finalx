@@ -11,7 +11,7 @@ import { useSystemInfo, toast, useUserState, wsClient } from '@finalx/common'
 import '@finalx/components/dist/style.css'
 import { login } from './api/user'
 import './app.scss'
-import { WSEvent } from './common/enums'
+// import { WSEvent } from './common/enums'
 import '../global.config'
 
 export default function App(props: any) {
@@ -36,9 +36,9 @@ export default function App(props: any) {
         setUserState({ token, userInfo })
 
         // 订阅事件
-        wsClient.subscribe(WSEvent.User, {
-          UserId: userInfo.id,
-        })
+        // wsClient.subscribe(WSEvent.User, {
+        //   UserId: userInfo.id,
+        // })
       } catch (e) {
         toast('登录失败，请重试')
       } finally {
