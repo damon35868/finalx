@@ -3,8 +3,8 @@ module.exports = {
     NODE_ENV: '"development"',
   },
   defineConstants: {
-    API_LINK: '"https://test-wjx.xoyo.com/wandering-shanghai-server/client"',
-    WS_LINK: '"wss://test-wjx.xoyo.com/wandering-shanghai-server/ws"',
+    API_LINK: '"https://finalx.com"',
+    WS_LINK: '"wss://finalx.com/ws"',
   },
   mini: {},
   h5: {},

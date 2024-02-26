@@ -1,8 +1,8 @@
 import { resolve } from 'path'
 
 const config = {
-  projectName: 'script-tour-miniprogram',
-  date: '2023-7-17',
+  projectName: '',
+  date: '',
   designWidth: 750,
   deviceRatio: {
     640: 2.34 / 2,
