@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from "react";
+import React, { CSSProperties, FC, ReactElement, isValidElement } from "react";
 import { View } from "@tarojs/components";
 import "./index.scss";
 
@@ -11,11 +11,17 @@ interface IStepProps {
     style?: CSSProperties;
     onClick?: () => any;
     offset?: { left?: number; right?: number };
+    children?: ReactElement;
   };
+  content?: {
+    titleStyle?: CSSProperties;
+    descStyle?: CSSProperties;
+  };
+  round?: ReactElement;
   items: { title?: string; desc?: string; process?: number }[];
 }
-export const Step: FC<IStepProps> = ({ proportion, items = [], pop, activeColor, slotColor }) => {
-  const { title, style, offset, onClick } = pop || {};
+export const Step: FC<IStepProps> = ({ proportion, items = [], pop, content, round, activeColor, slotColor }) => {
+  const { title, style, offset, children: popChildren, onClick } = pop || {};
 
   function getPopAliginStyle() {
     const { left = 0, right = 0 } = offset || {};
@@ -26,6 +32,8 @@ export const Step: FC<IStepProps> = ({ proportion, items = [], pop, activeColor,
       ? "step-groove-active-pop-left"
       : "";
   }
+
+  const { titleStyle, descStyle } = content || {};
 
   return (
     <View className='step' style={{ paddingTop: pop ? "102rpx" : "30rpx" }}>
@@ -41,12 +49,18 @@ export const Step: FC<IStepProps> = ({ proportion, items = [], pop, activeColor,
                 className={`step-round ${"step-round-" + (key + 1)} ${active ? "active" : ""}`}
                 style={{
                   left: `calc(${process + "%"} - 40rpx)`,
-                  borderColor: active ? activeColor : slotColor
+                  borderColor: active ? activeColor : slotColor,
+                  backgroundColor: active ? activeColor : slotColor
                 }}
               >
+                {round && round}
                 <View className='step-round-content'>
-                  <View className='step-round-content-title'>{title}</View>
-                  <View className='step-round-content-desc'>{desc}</View>
+                  <View className='step-round-content-title' style={titleStyle}>
+                    {title}
+                  </View>
+                  <View className='step-round-content-desc' style={descStyle}>
+                    {desc}
+                  </View>
                 </View>
               </View>
             );
@@ -65,9 +79,9 @@ export const Step: FC<IStepProps> = ({ proportion, items = [], pop, activeColor,
             {pop && (
               <View className={`step-groove-active-pop ${getPopAliginStyle()}`} onClick={onClick}>
                 <View className='step-groove-active-pop-title' style={style}>
-                  {title}
+                  {isValidElement(popChildren) ? popChildren : title}
                 </View>
-                <View className='step-groove-active-pop-rect' />
+                <View className='step-groove-active-pop-rect' style={style} />
               </View>
             )}
           </View>

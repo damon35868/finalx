@@ -1,5 +1,5 @@
-$normal: #3e30c8;
-$active: #8cfdd2;
+$normal: #2a2650;
+$active: #7a70ea;
 
 .step {
   height: 116rpx;
@@ -8,7 +8,7 @@ $active: #8cfdd2;
     position: relative;
   }
   &-warpper {
-    height: 40rpx;
+    height: 32rpx;
     width: 100%;
     top: 50%;
     position: absolute;
@@ -18,12 +18,12 @@ $active: #8cfdd2;
     transform: translateY(-50%);
 
     .step-round {
-      width: 40rpx;
-      height: 40rpx;
+      width: 32rpx;
+      height: 32rpx;
       border-radius: 50%;
       position: absolute;
       box-sizing: border-box;
-      border: 6rpx solid $normal;
+      border: 4rpx solid $normal;
       background-color: #5837e0;
 
       &.active {
@@ -54,6 +54,7 @@ $active: #8cfdd2;
   }
   &-groove {
     position: relative;
+    border-radius: 4.5rpx;
     &-pipeline {
       background-color: $normal;
       height: 8rpx;
@@ -72,7 +73,7 @@ $active: #8cfdd2;
       .step-groove-active-pop {
         right: 0;
         transform: translateX(50%);
-        bottom: 50rpx;
+        bottom: 48rpx;
         position: absolute;
 
         &-title {
