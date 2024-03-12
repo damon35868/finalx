@@ -53,7 +53,7 @@ export const Step: FC<IStepProps> = ({ proportion, items = [], pop, content, rou
                   backgroundColor: active ? activeColor : slotColor
                 }}
               >
-                {round && round}
+                {!!(active && round) && round}
                 <View className='step-round-content'>
                   <View className='step-round-content-title' style={titleStyle}>
                     {title}
