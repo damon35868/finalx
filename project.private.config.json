@@ -3,7 +3,9 @@
   "projectname": "miniprogram",
   "setting": {
     "compileHotReLoad": false,
-    "urlCheck": false
+    "urlCheck": false,
+    "ignoreDevUnusedFiles": false,
+    "ignoreUploadUnusedFiles": false
   },
   "libVersion": "2.33.0"
 }
