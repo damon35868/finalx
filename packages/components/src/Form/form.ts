@@ -30,16 +30,20 @@ export class Form {
     this.clearErrors();
 
     if (Array.isArray(this.children)) {
-      this.children.forEach((item, key) => {
+      let idx = 0;
+      this.children.forEach(item => {
         const name = item.props.name;
+        if (!name) return;
 
         const { value: fieldValue } = this.getField(name) || {};
         const value = fieldValue || this.initFields[name] || "";
-        this.fields[key] = { name, value };
+        this.fields[idx] = { name, value };
+        idx += 1;
       });
       return;
     }
 
+    if (!this.children.props.name) return;
     const { value: fieldValue } = this.getField(this.children.props.name) || {};
     this.fields = [
       {
@@ -54,14 +58,17 @@ export class Form {
     this.clearErrors();
 
     if (Array.isArray(this.children)) {
-      this.children.forEach((item, key) => {
+      let idx = 0;
+      this.children.forEach(item => {
         const name = item.props.name;
+        if (!name) return;
 
         const value = this.initFields[name] || "";
-        this.fields[key] = { name, value };
+        this.fields[idx] = { name, value };
 
         this.formItemObj[name].setErrMsg("");
         this.formItemObj[name].setValue(value);
+        idx += 1;
       });
       return;
     }
@@ -165,7 +172,7 @@ export class Form {
    * @return {*}
    */
   public getField(key: string): IField {
-    const field = this.fields.find(item => item.name === key);
+    const field = this.fields.find(item => item && item.name === key);
     return field || null;
   }
 
@@ -183,7 +190,7 @@ export class Form {
    * @return {*}
    */
   public setField(name: string, value: any) {
-    const field = this.fields.find(item => item.name === name) || {};
+    const field = this.fields.find(item => item && item.name === name) || {};
     field.value = value;
     this.formItemObj[name].setValue(value);
   }
@@ -208,7 +215,7 @@ export class Form {
     return new Promise(async (resove, reject) => {
       try {
         if (Array.isArray(this.children)) {
-          const errorPromise = this.children.map(none => this.checkError(none.props));
+          const errorPromise = this.children.map(node => this.checkError(node.props));
 
           await Promise.all(errorPromise);
           this.fields.forEach(item => (fieldsObj[item.name] = item.value));
@@ -253,6 +260,8 @@ export class Form {
       if (!props) return resove(true);
 
       const { label, name, required, rules } = props || {};
+      if (!name) return resove(true);
+
       if (!required && !rules) return resove(true);
 
       let msg = "";
