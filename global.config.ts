@@ -11,8 +11,8 @@ import { globalConfig } from '@finalx/common'
       // header:{}
       wsCheckUser: false,
       // ENV -> 如需调试，可手动覆盖环境，上线前记得改回自动模式
-      baseUrl: 'https://finalx.com',
-      wsUrl: 'wss://finalx.com',
+      baseUrl: API_LINK,
+      wsUrl: WS_LINK
     },
     middleware: {
       userAuth: {
