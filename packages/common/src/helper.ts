@@ -1,3 +1,4 @@
+import { config } from "./config";
 import { ErrorCode } from "./enums";
 import { toast } from "./utils";
 
@@ -40,6 +41,14 @@ class Helper {
           if (!rule(res)) throw new Error(res.msg && typeof res.msg === "object" ? res.msg.message : `${text}失败`);
         } else {
           const { code, message } = res || {};
+          const { errorRule } = config.request || {};
+          const { codeHandler, rejectHandler } = errorRule || {};
+
+          if (codeHandler) {
+            const status = codeHandler(code);
+            if (status) throw new Error((rejectHandler ? rejectHandler(res) : message) || "网络错误");
+          }
+
           if (code === ErrorCode.error) throw new Error(message);
           if (code === ErrorCode.server) {
             let message = "";

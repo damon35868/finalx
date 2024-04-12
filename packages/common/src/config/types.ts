@@ -11,6 +11,10 @@ export interface requestConfigType {
   timeout?: number;
   wsCheckUser?: boolean;
   bearerToken?: boolean;
+  errorRule?: {
+    codeHandler?: (code: number) => boolean;
+    rejectHandler?: (res: any) => string;
+  };
 }
 
 export type TFilterKey = string | ({ key: string; rule?: (val: any, key: string) => boolean } | string)[];

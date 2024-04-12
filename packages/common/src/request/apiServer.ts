@@ -27,9 +27,19 @@ export function apiServer({ url, data, method = "POST", coverUrl }: requestProps
         ...(config.request?.header || {})
       },
       success: res => {
-        const { statusCode } = res;
-        if (statusCode === 200) return resolve(res.data);
-        reject("网络错误");
+        const { statusCode, data } = res;
+        const { message } = data || {};
+        const { errorRule } = config.request || {};
+        const { codeHandler, rejectHandler } = errorRule || {};
+
+        if (codeHandler) {
+          const status = codeHandler(statusCode);
+          if (!status) return resolve(res.data);
+          reject((rejectHandler ? rejectHandler(res) : message) || "网络错误");
+        } else {
+          if (statusCode === 200) return resolve(res.data);
+          reject(message || "网络错误");
+        }
       },
       fail: e => reject(e)
     });

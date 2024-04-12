@@ -27,8 +27,21 @@ const asyncFn = ({ url, data, method, token }: { url: string; data: any; method:
       }
     })
       .then(res => {
+        const { statusCode, data } = res;
+        const { message } = data || {};
         const resp = res.data.hasOwnProperty("data") ? res.data.data : res.data;
-        resolve(resp);
+
+        const { errorRule } = config.request || {};
+        const { codeHandler, rejectHandler } = errorRule || {};
+
+        if (codeHandler) {
+          const status = codeHandler(statusCode);
+          if (!status) return resolve(res.data);
+          reject((rejectHandler ? rejectHandler(res) : message) || "网络错误");
+        } else {
+          if (statusCode === 200) return resolve(resp);
+          reject(message || "网络错误");
+        }
       })
       .catch(e => {
         reject(e);
