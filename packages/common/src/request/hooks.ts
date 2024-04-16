@@ -36,12 +36,11 @@ const asyncFn = ({ url, data, method, token }: { url: string; data: any; method:
 
         if (codeHandler) {
           const status = codeHandler(statusCode);
-          if (!status) return resolve(res.data);
-          reject((rejectHandler ? rejectHandler(res) : message) || "网络错误");
+          if (!status) return resolve(resp);
         } else {
           if (statusCode === 200) return resolve(resp);
-          reject(message || "网络错误");
         }
+        reject((rejectHandler ? rejectHandler(res) : message) || "网络错误");
       })
       .catch(e => {
         reject(e);

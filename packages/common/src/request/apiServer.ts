@@ -34,12 +34,11 @@ export function apiServer({ url, data, method = "POST", coverUrl }: requestProps
 
         if (codeHandler) {
           const status = codeHandler(statusCode);
-          if (!status) return resolve(res.data);
-          reject((rejectHandler ? rejectHandler(res) : message) || "网络错误");
+          if (!status) return resolve(data);
         } else {
-          if (statusCode === 200) return resolve(res.data);
-          reject(message || "网络错误");
+          if (statusCode === 200) return resolve(data);
         }
+        reject((rejectHandler ? rejectHandler(res) : message) || "网络错误");
       },
       fail: e => reject(e)
     });

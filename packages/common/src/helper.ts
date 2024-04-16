@@ -43,13 +43,15 @@ class Helper {
           const { code, message } = res || {};
           const { errorRule } = config.request || {};
           const { codeHandler, rejectHandler } = errorRule || {};
+          const rejectMessage = (rejectHandler ? rejectHandler(res) : message) || "网络错误";
 
           if (codeHandler) {
             const status = codeHandler(code);
-            if (status) throw new Error((rejectHandler ? rejectHandler(res) : message) || "网络错误");
+            if (status) throw new Error(rejectMessage);
           }
 
-          if (code === ErrorCode.error) throw new Error(message);
+          if (code !== 0 && code !== 200) throw new Error(rejectMessage);
+          if (code === ErrorCode.error) throw new Error(rejectMessage);
           if (code === ErrorCode.server) {
             let message = "";
             if (res.msg) {
@@ -63,7 +65,7 @@ class Helper {
               }
             }
 
-            throw new Error(message);
+            throw new Error(message || rejectMessage);
           }
         }
 
