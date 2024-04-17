@@ -75,7 +75,7 @@ class Helper {
       } catch (e: any) {
         reject(e);
         onError && onError(e);
-        showToast && toast(errorText || e.message);
+        showToast && toast(errorText || (e?.message ? e?.message : e));
       }
     });
   }

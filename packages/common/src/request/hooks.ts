@@ -42,9 +42,7 @@ const asyncFn = ({ url, data, method, token }: { url: string; data: any; method:
         }
         reject((rejectHandler ? rejectHandler(res) : message) || "网络错误");
       })
-      .catch(e => {
-        reject(e);
-      });
+      .catch(e => reject(e));
   });
 };
 
