@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, CSSProperties } from "react";
 
 export interface FormItemType {
   label?: string;
@@ -12,6 +12,8 @@ export interface FormItemType {
   rules?: RuleType | RuleType[];
   children: ReactElement;
   errorAligin?: "left" | "right";
+  hiddenRequiredIcon?: boolean;
+  requiredIconStyle?: CSSProperties;
 }
 
 export interface RuleType {

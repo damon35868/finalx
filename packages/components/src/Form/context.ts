@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, CSSProperties } from "react";
 import { Form } from "./form";
 
 export const FormContext = createContext<{
@@ -10,4 +10,6 @@ export const FormContext = createContext<{
   errorColor?: string;
   disabled?: boolean;
   errorAligin?: "left" | "right";
+  hiddenRequiredIcon?: boolean;
+  requiredIconStyle?: CSSProperties;
 }>({} as any);

@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, Ref, useEffect, useImperativeHandle, useState, isValidElement } from "react";
+import React, { FC, ReactElement, CSSProperties, Ref, useEffect, useImperativeHandle, useState, isValidElement } from "react";
 import { Form as FormObj } from "./form";
 import { FormContext } from "./context";
 import { View } from "@tarojs/components";
@@ -17,6 +17,8 @@ export const Form: FC<{
   layout?: "normal" | "between";
   onChange?: (val: any) => any;
   errorAligin?: "left" | "right";
+  hiddenRequiredIcon?: boolean;
+  requiredIconStyle?: CSSProperties;
 }> = ({
   layout = "between",
   formRef,
@@ -28,7 +30,9 @@ export const Form: FC<{
   disabled,
   errorColor,
   onChange,
-  errorAligin
+  errorAligin,
+  hiddenRequiredIcon = false,
+  requiredIconStyle = {}
 }) => {
   const [form, setForm] = useState<FormObj>();
 
@@ -48,7 +52,9 @@ export const Form: FC<{
   if (!form) return null;
 
   return (
-    <FormContext.Provider value={{ onChange, form, itemHeight, labelSize, labelColor, errorColor, disabled, errorAligin }}>
+    <FormContext.Provider
+      value={{ onChange, form, itemHeight, labelSize, labelColor, errorColor, disabled, requiredIconStyle, hiddenRequiredIcon, errorAligin }}
+    >
       <View className={`form form-${layout}`}>{children}</View>
     </FormContext.Provider>
   );

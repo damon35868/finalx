@@ -15,7 +15,9 @@ export const FormItem: FC<FormItemType> = ({
   required,
   disabled,
   rules,
-  errorAligin
+  errorAligin,
+  hiddenRequiredIcon,
+  requiredIconStyle
 }) => {
   const [value, setValue] = useState("");
   const [actionName, setAction] = useState("");
@@ -27,7 +29,9 @@ export const FormItem: FC<FormItemType> = ({
     labelSize: formLabelSize = "32rpx",
     labelColor: formLabelColor = "#333",
     errorColor: formErrorColor = "#eb0432",
-    errorAligin: formErrorAligin = "right"
+    errorAligin: formErrorAligin = "right",
+    hiddenRequiredIcon: formHiddenRequiredIcon,
+    requiredIconStyle: formRequiredIconStyle = {}
   } = useContext(FormContext);
   const [errMsg, setErrMsg] = useState<string>("");
 
@@ -73,10 +77,17 @@ export const FormItem: FC<FormItemType> = ({
     <View className='form-item' style={{ height: itemHeight || formItemHeight }}>
       <Label style={{ fontSize: labelSize || formLabelSize, color: labelColor || formLabelColor }} className='form-item-label'>
         {label}
-        {(required || !!rules) && (
-          <View className='required-icon' style={{ color: errorColor || formErrorColor }}>
-            *
-          </View>
+        {!(typeof hiddenRequiredIcon === "boolean" ? hiddenRequiredIcon : formHiddenRequiredIcon) && (
+          <>
+            {(required || !!rules) && (
+              <View
+                className='required-icon'
+                style={Object.assign({ color: errorColor || formErrorColor }, requiredIconStyle || formRequiredIconStyle)}
+              >
+                *
+              </View>
+            )}
+          </>
         )}
       </Label>
       <View className='form-item-content'>{itemEl}</View>
