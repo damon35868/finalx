@@ -2,7 +2,7 @@ import { resolve } from 'path'
 
 const config = {
   projectName: '',
-  date: '',
+  date: '2024-04-29',
   designWidth: 750,
   deviceRatio: {
     640: 2.34 / 2,
