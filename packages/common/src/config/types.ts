@@ -6,11 +6,18 @@ export interface configTypes {
 
 export interface requestConfigType {
   baseUrl?: string;
-  wsUrl?: string;
   header?: any;
   timeout?: number;
-  wsCheckUser?: boolean;
   bearerToken?: boolean;
+  wsUrl?: string;
+  wsPing?: boolean;
+  wsAck?: boolean;
+  wsCheckUser?: boolean;
+  wsHeader?: any;
+  wsEventKey: {
+    eventKey: string;
+    dataKey: string;
+  };
   errorRule?: {
     codeHandler?: (code: number) => boolean;
     rejectHandler?: (res: any) => string;

@@ -29,8 +29,9 @@ export interface WsConnectOptions {
 }
 
 export interface SubscribeEvent {
-  EventName: string;
-  Data: any;
+  // EventName: string;
+  // Data: any;
+  [key: string]: any;
 }
 
 export interface WsHandler {
@@ -95,9 +96,11 @@ class WS implements Ws {
     this.client = null;
     this.client = await connectSocket({
       url: this.wsurl,
-      // header: {
-      //   'authorization': getItem('token')
-      // },
+      header: config.request.wsHeader
+        ? config.request.wsHeader
+        : {
+            authorization: getItem("token")
+          },
       fail: res => {
         console.log("[WS连接失败]", res);
       },
@@ -156,23 +159,25 @@ class WS implements Ws {
         const event = JSON.parse(message);
 
         // 如果事件名称为 'pong' 代表目前是与后端持续连接中,不需要做任何逻辑判断
-        if (event.EventName === "pong") {
+        if (event[config.request.wsEventKey.eventKey] === "pong") {
           this.lastPongTIme = this.now();
           continue;
         }
 
-        const { userId } = JSON.parse(event.Data || "{}");
+        const { userId } = JSON.parse(event[config.request.wsEventKey.dataKey] || "{}");
 
         if (config.request.wsCheckUser) {
-          if (this.userId === userId) this.emitter.emit(event.EventName, event);
+          if (this.userId === userId) this.emitter.emit(event[config.request.wsEventKey.eventKey], event);
         } else {
-          this.emitter.emit(event.EventName, event);
+          this.emitter.emit(event[config.request.wsEventKey.eventKey], event);
         }
 
-        // 告知后端已经收到消息,不需要继续发送当前事件的消息
-        this.client.send({
-          data: JSON.stringify({ EventName: "ack", Data: message })
-        });
+        if (config.request.wsAck) {
+          // 告知后端已经收到消息,不需要继续发送当前事件的消息
+          this.client.send({
+            data: JSON.stringify({ [config.request.wsEventKey.eventKey]: "ack", [config.request.wsEventKey.dataKey]: message })
+          });
+        }
       }
     });
   }
@@ -216,8 +221,8 @@ class WS implements Ws {
       }
 
       const event = {
-        EventName: channel,
-        Data: JSON.stringify(data)
+        [config.request.wsEventKey.eventKey]: channel,
+        [config.request.wsEventKey.dataKey]: JSON.stringify(data)
       } as SubscribeEvent;
       this.subscribeEvents[channel] = event;
       this.client.send({
@@ -241,7 +246,7 @@ class WS implements Ws {
 
   ping() {
     const event = {
-      EventName: "ping"
+      [config.request.wsEventKey.eventKey]: "ping"
     } as SubscribeEvent;
 
     setInterval(() => {
@@ -266,7 +271,7 @@ class WS implements Ws {
     this.onError();
     this.onOpen();
     this.onClose();
-    this.ping();
+    config.request.wsPing && this.ping();
   }
 }
 

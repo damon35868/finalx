@@ -10,7 +10,13 @@ class Config implements configTypes {
     wsUrl: "",
     baseUrl: "",
     timeout: 300000,
-    wsCheckUser: true
+    wsCheckUser: true,
+    wsPing: true,
+    wsAck: true,
+    wsEventKey: {
+      eventKey: "EventName",
+      dataKey: "Data"
+    }
   };
 }
 
