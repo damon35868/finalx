@@ -16,10 +16,15 @@ export interface Ws {
 }
 
 export interface Event {
-  EventName: string;
-  From: string;
-  To: string;
-  Data: string;
+  EventName?: string;
+  From?: string;
+  To?: string;
+  Data?: string;
+
+  data?: string;
+  event?: string;
+  from?: string;
+  to?: string;
 }
 
 export type WsEventFunc = (event: Event) => void;
@@ -154,7 +159,6 @@ class WS implements Ws {
   onMessage(): void {
     this.client.onMessage(res => {
       const messages = res.data.split("\n");
-      // console.log("来消息", messages);
       for (const message of messages) {
         const event = JSON.parse(message);
 

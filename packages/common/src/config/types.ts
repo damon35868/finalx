@@ -14,9 +14,9 @@ export interface requestConfigType {
   wsAck?: boolean;
   wsCheckUser?: boolean;
   wsHeader?: any;
-  wsEventKey: {
-    eventKey: string;
-    dataKey: string;
+  wsEventKey?: {
+    eventKey?: string;
+    dataKey?: string;
   };
   errorRule?: {
     codeHandler?: (code: number) => boolean;
