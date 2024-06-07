@@ -108,10 +108,12 @@ class WS implements Ws {
           },
       fail: res => {
         console.log("[WS连接失败]", res);
+        config.request.wsOnInitFail && config.request.wsOnInitFail(res);
       },
       success: res => {
         console.log("[WS连接成功]", res);
         this.inited = true;
+        config.request.wsOnInitSuccess && config.request.wsOnInitSuccess(res);
       },
       ...this.options
     });
@@ -135,12 +137,14 @@ class WS implements Ws {
       if (this.liveProbe()) return;
       console.log("WS重连中");
       await this.connect();
+      config.request.wsOnReConnect && config.request.wsOnReConnect();
     }, 3000);
   }
 
   onError(): void {
     this.client.onError((err: any) => {
       console.log("WS onError", err);
+      config.request.wsOnError && config.request.wsOnError();
       this.reConnect();
     });
   }
@@ -205,6 +209,8 @@ class WS implements Ws {
         fail: res => console.log("WS close fail", res),
         success: res => console.log("WS close success", res)
       });
+
+      config.request.wsOnClose && config.request.wsOnClose();
       this.reConnect();
     });
   }

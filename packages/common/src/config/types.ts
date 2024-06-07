@@ -18,6 +18,11 @@ export interface requestConfigType {
     eventKey?: string;
     dataKey?: string;
   };
+  wsOnInitSuccess?: (res?: any) => any;
+  wsOnInitFail?: (res?: any) => any;
+  wsOnReConnect?: () => any;
+  wsOnError?: () => any;
+  wsOnClose?: () => any;
   errorRule?: {
     codeHandler?: (code: number) => boolean;
     rejectHandler?: (res: any) => string;
