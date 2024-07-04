@@ -11,17 +11,27 @@ interface BottomModalProps {
   children: ReactNode;
   rounded?: boolean; //是否开启圆角
   style?: CSSProperties;
+  contentStyle?: CSSProperties;
 }
 
-export const BottomModal: FC<BottomModalProps> = ({ status, setStatus, closeOnClickModal = true, onClose, style = {}, children, rounded }) => {
+export const BottomModal: FC<BottomModalProps> = ({
+  status,
+  setStatus,
+  closeOnClickModal = true,
+  onClose,
+  style = {},
+  contentStyle = {},
+  children,
+  rounded
+}) => {
   const close = () => {
     onClose && onClose();
     setStatus && setStatus(false);
   };
 
   return (
-    <View catchMove style={style} className={classNames("sd_bottom-modal", { show: status })} onClick={() => closeOnClickModal && close()}>
-      <View className={classNames("bg sd_bottom-modal-content", { active: status, rounded })} onClick={e => e.stopPropagation()}>
+    <View catchMove className={classNames("sd_bottom-modal", { show: status })} onClick={() => closeOnClickModal && close()} style={style}>
+      <View className={classNames("bg sd_bottom-modal-content", { active: status, rounded })} onClick={e => e.stopPropagation()} style={contentStyle}>
         <View className='sd_bottom-modal-content-main'>{children}</View>
       </View>
     </View>
