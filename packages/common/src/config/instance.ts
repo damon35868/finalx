@@ -7,6 +7,8 @@ class Config implements configTypes {
     roleAuth: {}
   };
   public request: requestConfigType = {
+    host: "",
+    path: "",
     wsUrl: "",
     baseUrl: "",
     timeout: 300000,

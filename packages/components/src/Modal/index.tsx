@@ -43,7 +43,7 @@ export const Modal: FC<ModalProps> = ({
   return (
     <View
       catchMove
-      className={classNames("sd_modal", {
+      className={classNames("fx_modal", {
         show: status,
         bg: !hideBG
       })}
@@ -55,7 +55,7 @@ export const Modal: FC<ModalProps> = ({
       }}
       style={style}
     >
-      <View onClick={e => e.stopPropagation()} className={classNames(`sd_modal-scale-${contentStatus ? "in" : "out"}`)} style={contentStyle}>
+      <View onClick={e => e.stopPropagation()} className={classNames(`fx_modal-scale-${contentStatus ? "in" : "out"}`)} style={contentStyle}>
         {children}
       </View>
     </View>

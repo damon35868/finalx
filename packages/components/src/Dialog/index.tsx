@@ -23,10 +23,10 @@ export const Dialog: FC<DialogProps> = ({ status, setStatus, content, onClick, o
 
   return (
     <Modal cRef={ref} status={status} setStatus={setStatus} onCancel={onCancel}>
-      <View className='sd_dialog'>
-        <View className='sd_dialog-title'>{title}</View>
-        <View className='sd_dialog-desc'>{desc}</View>
-        <Button className='sd_dialog-btn' onClick={() => onClick && onClick(ref.current?.close)}>
+      <View className='fx_dialog'>
+        <View className='fx_dialog-title'>{title}</View>
+        <View className='fx_dialog-desc'>{desc}</View>
+        <Button className='fx_dialog-btn' onClick={() => onClick && onClick(ref.current?.close)}>
           {btnText}
         </Button>
       </View>

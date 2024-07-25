@@ -1,4 +1,4 @@
-.sd_nav-bar {
+.fx_nav-bar {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,18 +11,18 @@
     background-color: #fff !important;
   }
 
-  .sd_nav-bar-content {
+  .fx_nav-bar-content {
     font-size: 31rpx;
     font-weight: 500;
     position: relative;
     display: flex;
     align-items: center;
-    .sd_nav-bar-back-parent {
+    .fx_nav-bar-back-parent {
       width: 120rpx;
       height: 100%;
       display: flex;
       align-items: center;
-      .sd_nav-bar-back-icon {
+      .fx_nav-bar-back-icon {
         padding-left: 10rpx;
         width: 40rpx;
         height: 40rpx;
@@ -30,7 +30,7 @@
       }
     }
 
-    .sd_nav-bar-title {
+    .fx_nav-bar-title {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);

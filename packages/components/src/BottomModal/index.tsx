@@ -30,9 +30,9 @@ export const BottomModal: FC<BottomModalProps> = ({
   };
 
   return (
-    <View catchMove className={classNames("sd_bottom-modal", { show: status })} onClick={() => closeOnClickModal && close()} style={style}>
-      <View className={classNames("bg sd_bottom-modal-content", { active: status, rounded })} onClick={e => e.stopPropagation()} style={contentStyle}>
-        <View className='sd_bottom-modal-content-main'>{children}</View>
+    <View catchMove className={classNames("fx_bottom-modal", { show: status })} onClick={() => closeOnClickModal && close()} style={style}>
+      <View className={classNames("bg fx_bottom-modal-content", { active: status, rounded })} onClick={e => e.stopPropagation()} style={contentStyle}>
+        <View className='fx_bottom-modal-content-main'>{children}</View>
       </View>
     </View>
   );

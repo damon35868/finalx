@@ -37,22 +37,22 @@ export const NavBar: FC<NavBarProps> = memo(({ title = "", scrollShow, onBack, s
         ...style,
         ...(isScroll ? (scrollStyle ? scrollStyle : {}) : {})
       }}
-      className={classNames("sd_nav-bar", { bg: isScroll && !scrollStyle })}
+      className={classNames("fx_nav-bar", { bg: isScroll && !scrollStyle })}
     >
-      <View className='sd_nav-bar-content' style={{ height: customNavHeight - statusBarHeight + "PX" }}>
+      <View className='fx_nav-bar-content' style={{ height: customNavHeight - statusBarHeight + "PX" }}>
         {showBack && (
           <View
-            className='sd_nav-bar-back-parent'
+            className='fx_nav-bar-back-parent'
             onClick={() => {
               if (onBack) return onBack();
               routerBack();
             }}
           >
-            {!icon ? <Image className='sd_nav-bar-back-icon' src={theme === "dark" || isScroll ? darkIcon : lightIcon} /> : icon}
+            {!icon ? <Image className='fx_nav-bar-back-icon' src={theme === "dark" || isScroll ? darkIcon : lightIcon} /> : icon}
           </View>
         )}
 
-        {(isScroll || !scrollShow) && (isValidElement(title) ? title : <Text className='sd_nav-bar-title'>{title}</Text>)}
+        {(isScroll || !scrollShow) && (isValidElement(title) ? title : <Text className='fx_nav-bar-title'>{title}</Text>)}
       </View>
     </View>
   );

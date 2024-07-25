@@ -5,6 +5,8 @@ export interface configTypes {
 }
 
 export interface requestConfigType {
+  host?: string;
+  path?: string;
   baseUrl?: string;
   header?: any;
   timeout?: number;

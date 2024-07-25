@@ -1,4 +1,4 @@
-.sd_modal {
+.fx_modal {
   visibility: hidden;
   position: fixed;
   top: 0;
@@ -16,7 +16,7 @@
   }
   &.show {
     visibility: visible;
-    .sd_modal-scale-in {
+    .fx_modal-scale-in {
       animation: scale-in 0.3s ease;
     }
   }

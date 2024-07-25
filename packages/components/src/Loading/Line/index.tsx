@@ -4,8 +4,8 @@ import "./index.scss";
 
 export const LineLoading = () => {
   return (
-    <View className='sd_line-loading'>
-      <View className='sd_line-loading-light' />
+    <View className='fx_line-loading'>
+      <View className='fx_line-loading-light' />
     </View>
   );
 };
