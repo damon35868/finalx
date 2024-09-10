@@ -3,8 +3,8 @@ module.exports = {
     NODE_ENV: '"production"',
   },
   defineConstants: {
-    API_LINK: '"https://finalx.com"',
-    WS_LINK: '"wss://finalx.com/ws"',
+    API_LINK: '"https://finalx.cc"',
+    WS_LINK: '"wss://finalx.cc/ws"',
   },
   mini: {},
   h5: {
