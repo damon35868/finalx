@@ -1,11 +1,11 @@
-import resolve from "@rollup/plugin-node-resolve";
+import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
+import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
-import { terser } from "rollup-plugin-terser";
+import dts from "rollup-plugin-dts";
 import external from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
-import babel from "@rollup/plugin-babel";
-import dts from "rollup-plugin-dts";
+import { terser } from "rollup-plugin-terser";
 
 export default [
   {
@@ -32,7 +32,7 @@ export default [
         presets: ["@babel/preset-react"]
       })
     ],
-    external: ["react", "@tarojs/taro", "@tarojs/components"]
+    external: ["react", "react-dom", "@tarojs/taro", "@tarojs/components"]
   },
   {
     input: "src/index.ts",
@@ -58,7 +58,7 @@ export default [
         presets: ["@babel/preset-react"]
       })
     ],
-    external: ["react", "@tarojs/taro", "@tarojs/components"]
+    external: ["react", "react-dom", "@tarojs/taro", "@tarojs/components"]
   },
   {
     input: "dist/index.d.ts",

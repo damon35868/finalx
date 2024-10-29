@@ -14,8 +14,7 @@
   ],
   "keywords": [
     "finalx",
-    "middleware",
-    "fx"
+    "middleware"
   ],
   "author": "D.M",
   "license": "MIT",
@@ -24,7 +23,7 @@
   },
   "dependencies": {
     "@babel/preset-react": "^7.22.5",
-    "@finalx/common": "^1.3.17",
+    "@finalx/common": "^1.3.18",
     "@rollup/plugin-typescript": "^11.1.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
