@@ -1,12 +1,7 @@
 ## [文档地址](https://finalx-doc.vercel.app)（正在更新中）
 
-<h3 align="center">
-  FinalX
-</h3>
-
-<p align="center">
-基于Taro、React打造的一款跨端开发的工具及组件库
-</p>
+<h2 align="center">FinalX</h2>
+<p align="center">基于Taro、React打造的一款跨端开发的工具及组件库</p>
 
 ### Installation 安装
 
