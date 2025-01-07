@@ -10,12 +10,22 @@
 
 ### Installation 安装
 
-```shell
-# npm
-npm install @finalx/cli -g
+#### npm
 
-# Yarn
+```shell
+npm install @finalx/cli -g
+```
+
+#### yarn
+
+```shell
 yarn global add @finalx/cli
+```
+
+#### pnpm
+
+```shell
+pnpm install @finalx/cli -g
 ```
 
 ### Init 生成项目结构
