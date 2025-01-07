@@ -1,7 +1,7 @@
 ## [文档地址](https://finalx-doc.vercel.app)（正在更新中）
 
 <h3 align="center">
-  @finalx
+  FinalX
 </h3>
 
 <p align="center">
