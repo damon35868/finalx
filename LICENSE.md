@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2015-present Sebastian McKenzie and other contributors
+Copyright (c) 2025-present Sebastian McKenzie and other contributors
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
