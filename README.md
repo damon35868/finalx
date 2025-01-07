@@ -18,7 +18,7 @@ npm install @finalx/cli -g
 yarn global add @finalx/cli
 ```
 
-### Installation 生成项目结构
+### Init 生成项目结构
 
 ```shell
 finalx init <projectName>
